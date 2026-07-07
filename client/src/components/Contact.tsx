@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle2, Loader2 } from "lucide-react";
+
+function encode(data: Record<string, string>) {
+  return Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join("&");
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,6 +17,7 @@ export default function Contact() {
     service: "",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -21,10 +28,22 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoLink = `mailto:Brightstarautoltd@gmail.com?subject=Appointment Request from ${formData.name}&body=Name: ${formData.name}%0DPhone: ${formData.phone}%0DEmail: ${formData.email}%0DVehicle: ${formData.vehicle}%0DService: ${formData.service}%0DMessage: ${formData.message}`;
-    window.location.href = mailtoLink;
+    setStatus("submitting");
+    try {
+      // Netlify Forms: a static replica of this form lives in index.html
+      // so Netlify's build bot can detect it; this fetch posts the real submission.
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...formData }),
+      });
+      setStatus("success");
+      setFormData({ name: "", phone: "", email: "", vehicle: "", service: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   const containerVariants = {
@@ -40,6 +59,87 @@ export default function Contact() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
+  const infoItems = [
+    {
+      icon: MapPin,
+      label: "Location",
+      content: (
+        <>
+          51 Toro Road North, Unit #3
+          <br />
+          North York, ON M3J 2A4
+        </>
+      ),
+    },
+    {
+      icon: Phone,
+      label: "Phone",
+      content: (
+        <>
+          <a href="tel:+14166350812" className="hover:text-primary transition-colors">
+            +1 (416) 635-0812
+          </a>
+          <br />
+          <a href="tel:+14168339252" className="hover:text-primary transition-colors">
+            +1 (416) 833-9252
+          </a>
+        </>
+      ),
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      content: (
+        <a href="mailto:Brightstarautoltd@gmail.com" className="hover:text-primary transition-colors">
+          Brightstarautoltd@gmail.com
+        </a>
+      ),
+    },
+    {
+      icon: Clock,
+      label: "Hours",
+      content: (
+        <>
+          Mon &ndash; Fri: 9:00 AM &ndash; 6:00 PM
+          <br />
+          Sat: 9:00 AM &ndash; 4:00 PM
+          <br />
+          Sun: Closed
+        </>
+      ),
+    },
+  ];
+
+  if (status === "success") {
+    return (
+      <section id="contact" className="section-spacing bg-background relative overflow-hidden">
+        <div className="absolute inset-0 noise-overlay" />
+        <div className="container relative z-10">
+          <motion.div
+            className="max-w-xl mx-auto text-center py-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <CheckCircle2 size={56} className="text-primary mx-auto mb-6" />
+            <h2 className="text-3xl font-display font-bold text-white mb-3">
+              Request Received
+            </h2>
+            <p className="text-foreground/70 mb-8">
+              Thanks for reaching out — we'll call or email you back shortly to confirm your free estimate.
+            </p>
+            <button
+              onClick={() => setStatus("idle")}
+              className="text-primary font-semibold hover:underline"
+            >
+              Send another request
+            </button>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="contact" className="section-spacing bg-background relative overflow-hidden">
       <div className="absolute inset-0 noise-overlay" />
@@ -53,19 +153,23 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          <span className="signature-underline text-xs font-semibold text-primary tracking-[0.25em] uppercase mb-4">
+            Free, No-Pressure Estimate
+          </span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mt-4 mb-4">
             Get in Touch
           </h2>
           <p className="text-lg text-foreground/70">
-            Ready to restore your vehicle? Contact us today for a free estimate.
+            Tell us what happened and we'll get back to you with a straight answer, usually same-day.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}
           <motion.form
+            name="contact"
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="corner-accent space-y-6 p-6 md:p-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -81,12 +185,12 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-card border border-white/10 rounded-lg text-white placeholder-foreground/50 focus:border-primary focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
                 placeholder="Your name"
               />
             </motion.div>
 
-            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4">
+            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-semibold text-white mb-2">
                   Phone
@@ -97,7 +201,7 @@ export default function Contact() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-card border border-white/10 rounded-lg text-white placeholder-foreground/50 focus:border-primary focus:outline-none transition-all"
+                  className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
                   placeholder="(416) 000-0000"
                 />
               </div>
@@ -111,7 +215,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-card border border-white/10 rounded-lg text-white placeholder-foreground/50 focus:border-primary focus:outline-none transition-all"
+                  className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
                   placeholder="your@email.com"
                 />
               </div>
@@ -126,7 +230,7 @@ export default function Contact() {
                 name="vehicle"
                 value={formData.vehicle}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-card border border-white/10 rounded-lg text-white placeholder-foreground/50 focus:border-primary focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
                 placeholder="e.g., Honda Civic 2020"
               />
             </motion.div>
@@ -139,15 +243,15 @@ export default function Contact() {
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-card border border-white/10 rounded-lg text-white focus:border-primary focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white focus:border-primary focus:outline-none transition-all"
               >
-                <option value="">Select a service</option>
-                <option value="Collision Repair">Collision Repair</option>
-                <option value="Paint & Refinishing">Paint & Refinishing</option>
-                <option value="Dent Removal">Dent Removal</option>
-                <option value="Frame Straightening">Frame Straightening</option>
-                <option value="Insurance Claims">Insurance Claims</option>
-                <option value="Auto Detailing">Auto Detailing</option>
+                <option className="bg-card" value="">Select a service</option>
+                <option className="bg-card" value="Collision Repair">Collision Repair</option>
+                <option className="bg-card" value="Paint & Refinishing">Paint & Refinishing</option>
+                <option className="bg-card" value="Dent Removal">Dent Removal</option>
+                <option className="bg-card" value="Frame Straightening">Frame Straightening</option>
+                <option className="bg-card" value="Insurance Claims">Insurance Claims</option>
+                <option className="bg-card" value="Auto Detailing">Auto Detailing</option>
               </select>
             </motion.div>
 
@@ -160,128 +264,60 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3 bg-card border border-white/10 rounded-lg text-white placeholder-foreground/50 focus:border-primary focus:outline-none transition-all resize-none"
+                className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all resize-none"
                 placeholder="Tell us about your vehicle and what you need..."
               />
             </motion.div>
 
+            {status === "error" && (
+              <motion.p variants={itemVariants} className="text-destructive text-sm">
+                Something went wrong sending your request. Please call us directly at{" "}
+                <a href="tel:+14166350812" className="underline">
+                  (416) 635-0812
+                </a>
+                .
+              </motion.p>
+            )}
+
             <motion.button
               type="submit"
-              className="w-full px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/50 transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              disabled={status === "submitting"}
+              className="w-full px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/50 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              whileHover={{ scale: status === "submitting" ? 1 : 1.02 }}
+              whileTap={{ scale: status === "submitting" ? 1 : 0.98 }}
               variants={itemVariants}
             >
-              Send Request
+              {status === "submitting" ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                "Get My Free Estimate"
+              )}
             </motion.button>
           </motion.form>
 
-          {/* Contact Info */}
+          {/* Contact Info - plain list, no card boxes */}
           <motion.div
-            className="space-y-8"
+            className="divide-y divide-white/10"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            {/* Address */}
-            <motion.div
-              className="bg-card border border-white/10 rounded-xl p-6"
-              variants={itemVariants}
-              whileHover={{ borderColor: "oklch(72% 0.18 75)" }}
-            >
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Location</h3>
-                  <p className="text-foreground/70">
-                    51 Toro Road North, Unit #3
-                    <br />
-                    North York, ON M3J 2A4
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Phone */}
-            <motion.div
-              className="bg-card border border-white/10 rounded-xl p-6"
-              variants={itemVariants}
-              whileHover={{ borderColor: "oklch(72% 0.18 75)" }}
-            >
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Phone</h3>
-                  <p className="text-foreground/70">
-                    <a
-                      href="tel:+14166350812"
-                      className="hover:text-primary transition-colors"
-                    >
-                      +1 (416) 635-0812
-                    </a>
-                    <br />
-                    <a
-                      href="tel:+14168339252"
-                      className="hover:text-primary transition-colors"
-                    >
-                      +1 (416) 833-9252
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Email */}
-            <motion.div
-              className="bg-card border border-white/10 rounded-xl p-6"
-              variants={itemVariants}
-              whileHover={{ borderColor: "oklch(72% 0.18 75)" }}
-            >
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Email</h3>
-                  <p className="text-foreground/70">
-                    <a
-                      href="mailto:Brightstarautoltd@gmail.com"
-                      className="hover:text-primary transition-colors"
-                    >
-                      Brightstarautoltd@gmail.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Hours */}
-            <motion.div
-              className="bg-card border border-white/10 rounded-xl p-6"
-              variants={itemVariants}
-              whileHover={{ borderColor: "oklch(72% 0.18 75)" }}
-            >
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Clock size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Hours</h3>
-                  <p className="text-foreground/70 text-sm">
-                    Mon - Fri: 9:00 AM - 6:00 PM
-                    <br />
-                    Sat: 9:00 AM - 4:00 PM
-                    <br />
-                    Sun: Closed
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            {infoItems.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div key={i} className="flex gap-5 py-6 first:pt-0" variants={itemVariants}>
+                  <Icon size={22} className="text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">{item.label}</h3>
+                    <p className="text-foreground/70 leading-relaxed">{item.content}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>

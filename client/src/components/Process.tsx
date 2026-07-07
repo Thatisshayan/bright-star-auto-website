@@ -41,7 +41,7 @@ export default function Process() {
   return (
     <section className="section-spacing bg-background relative overflow-hidden">
       <div className="absolute inset-0 noise-overlay" />
-      
+
       <div className="container relative z-10">
         {/* Header */}
         <motion.div
@@ -51,54 +51,51 @@ export default function Process() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          <span className="signature-underline text-xs font-semibold text-primary tracking-[0.25em] uppercase mb-4">
+            From Drop-Off To Drive-Away
+          </span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mt-4 mb-4">
             How It Works
           </h2>
           <p className="text-lg text-foreground/70">
-            A streamlined process designed for your convenience and peace of mind.
+            Four steps, one point of contact, no surprises along the way.
           </p>
         </motion.div>
 
-        {/* Timeline - Asymmetric */}
+        {/* Timeline - plain, connected by a single line, no card boxes */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 relative"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
+          {/* Connector Line - full width, behind steps */}
+          <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-primary/60 via-primary/30 to-primary/60" />
+
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div key={index} variants={itemVariants} className="relative">
-                {/* Connector Line - Only on desktop */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-16 left-[calc(50%+2rem)] right-[calc(-50%-2rem)] h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
-                )}
-
-                {/* Step Card */}
-                <div className="relative z-10 bg-card border border-white/10 rounded-xl p-6 hover:border-primary/50 transition-all h-full">
-                  {/* Number Badge */}
-                  <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold text-background">
-                    {index + 1}
-                  </div>
-
-                  {/* Icon */}
+              <motion.div key={index} variants={itemVariants} className="relative text-center lg:text-left">
+                {/* Icon with number */}
+                <div className="relative inline-flex mb-6">
                   <motion.div
-                    className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg flex items-center justify-center mb-4"
+                    className="w-16 h-16 rounded-full flex items-center justify-center bg-card border border-primary/30 relative z-10"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
-                    <Icon size={32} className="text-primary" />
+                    <Icon size={26} className="text-primary" />
                   </motion.div>
-
-                  {/* Content */}
-                  <h3 className="text-lg font-display font-bold text-white mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-foreground/70">
-                    {step.description}
-                  </p>
+                  <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center z-20">
+                    {index + 1}
+                  </span>
                 </div>
+
+                <h3 className="text-lg font-display font-bold text-white mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-foreground/70 max-w-[220px] mx-auto lg:mx-0">
+                  {step.description}
+                </p>
               </motion.div>
             );
           })}

@@ -6,8 +6,8 @@
 /**
  * BRIGHT STAR AUTO DESIGN SYSTEM
  * ==============================
- * Premium dark automotive aesthetic with gold accents
- * Color Palette: Deep Black (#0A0A0A), Gold (#C9922A → #F0B429), White (#FFFFFF)
+ * Premium dark automotive aesthetic with true gold accents (not orange)
+ * Color Palette: Deep Black (#050505), Gold (#B8873A → #E8C468), White (#F7F7F7)
  * Typography: Bebas Neue (display), Inter (body)
  * Animations: Framer Motion + CSS transitions
  */
@@ -53,7 +53,7 @@
 
 :root {
   /* Typography */
-  --font-display: "Bebas Neue", sans-serif;
+  --font-display: "Oswald", sans-serif;
   --font-body: "Inter", sans-serif;
   
   /* Spacing & Radius */
@@ -68,20 +68,20 @@
   --popover: oklch(10% 0 0);
   --popover-foreground: oklch(97% 0 0);
   
-  /* Primary (Gold Accent) - STRONGER SATURATION */
-  --primary: oklch(70% 0.20 75); /* Rich Gold #D4A037 */
+  /* Primary (True Gold Accent) - hue 88 reads as gold, not orange (hue 75 skews orange) */
+  --primary: oklch(68% 0.135 80); /* Rich Gold #C9A24A */
   --primary-foreground: oklch(6% 0 0); /* Deep text on gold */
-  --sidebar-primary: oklch(70% 0.20 75);
+  --sidebar-primary: oklch(68% 0.135 80);
   --sidebar-primary-foreground: oklch(6% 0 0);
-  
+
   /* Secondary & Muted */
   --secondary: oklch(15% 0.01 0);
   --secondary-foreground: oklch(88% 0.005 65);
   --muted: oklch(25% 0.01 0);
   --muted-foreground: oklch(75% 0.005 65);
-  
-  /* Accent (Gold Glow) - MORE VIBRANT */
-  --accent: oklch(82% 0.24 75); /* Vibrant gold for emphasis */
+
+  /* Accent (Gold Glow) - brighter but still gold, not amber/orange */
+  --accent: oklch(78% 0.15 82); /* Vibrant champagne gold for emphasis */
   --accent-foreground: oklch(6% 0 0);
   
   /* Destructive */
@@ -91,22 +91,22 @@
   /* Borders & Input */
   --border: oklch(15% 0.01 0);
   --input: oklch(12% 0.01 0);
-  --ring: oklch(70% 0.20 75); /* Gold ring on focus */
-  
+  --ring: oklch(68% 0.135 80); /* Gold ring on focus */
+
   /* Chart Colors (gold gradient) */
-  --chart-1: oklch(72% 0.18 75);
-  --chart-2: oklch(75% 0.20 75);
-  --chart-3: oklch(70% 0.16 75);
-  --chart-4: oklch(68% 0.15 75);
-  --chart-5: oklch(65% 0.14 75);
-  
+  --chart-1: oklch(68% 0.135 80);
+  --chart-2: oklch(78% 0.16 90);
+  --chart-3: oklch(70% 0.13 86);
+  --chart-4: oklch(66% 0.12 84);
+  --chart-5: oklch(62% 0.11 82);
+
   /* Sidebar */
   --sidebar: oklch(10% 0 0);
   --sidebar-foreground: oklch(97% 0 0);
-  --sidebar-accent: oklch(70% 0.20 75);
+  --sidebar-accent: oklch(68% 0.135 80);
   --sidebar-accent-foreground: oklch(6% 0 0);
   --sidebar-border: oklch(15% 0.01 0);
-  --sidebar-ring: oklch(70% 0.20 75);
+  --sidebar-ring: oklch(68% 0.135 80);
   
   /* Animation Easings */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -126,17 +126,17 @@
   --secondary-foreground: oklch(88% 0.005 65);
   --muted: oklch(25% 0.01 0);
   --muted-foreground: oklch(75% 0.005 65);
-  --accent: oklch(82% 0.24 75);
+  --accent: oklch(78% 0.15 82);
   --accent-foreground: oklch(6% 0 0);
   --border: oklch(15% 0.01 0);
   --input: oklch(12% 0.01 0);
-  --ring: oklch(70% 0.20 75);
+  --ring: oklch(68% 0.135 80);
   --sidebar: oklch(10% 0 0);
   --sidebar-foreground: oklch(97% 0 0);
-  --sidebar-accent: oklch(70% 0.20 75);
+  --sidebar-accent: oklch(68% 0.135 80);
   --sidebar-accent-foreground: oklch(6% 0 0);
   --sidebar-border: oklch(15% 0.01 0);
-  --sidebar-ring: oklch(70% 0.20 75);
+  --sidebar-ring: oklch(68% 0.135 80);
 }
 
 @layer base {
@@ -158,9 +158,9 @@
   /* Typography System */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
   }
   
   h1 {
@@ -269,20 +269,22 @@
     @apply py-16 md:py-24 lg:py-32;
   }
   
-  /* Marquee Animation */
+  /* Marquee Animation - content is always duplicated 2x by the consumer,
+     so translating by exactly -50% (one full copy's width) loops seamlessly
+     with no jump/reset glitch. */
   @keyframes marquee {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translateX(-50%);
     }
   }
-  
+
   .marquee {
     animation: marquee 30s linear infinite;
   }
-  
+
   .marquee:hover {
     animation-play-state: paused;
   }
@@ -332,5 +334,123 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+
+  /**
+   * Signature Corner Accent
+   * Two short gold brackets in opposing corners - echoes the precision
+   * framing of an alignment/measuring rig. Used on hero content, forms,
+   * and feature cards instead of a generic border-box.
+   */
+  .corner-accent {
+    position: relative;
+  }
+
+  .corner-accent::before,
+  .corner-accent::after {
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: var(--primary);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  }
+
+  .corner-accent::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+
+  .corner-accent::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  .corner-accent:hover::before {
+    transform: translate(-3px, -3px);
+  }
+
+  .corner-accent:hover::after {
+    transform: translate(3px, 3px);
+    opacity: 1;
+  }
+
+  /**
+   * Signature Underline
+   * A short gold rule that grows from a seed mark - used under section
+   * eyebrows/kickers as a recurring brand signature instead of a plain label.
+   */
+  .signature-underline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .signature-underline::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    flex-shrink: 0;
+  }
+
+  /**
+   * Quality Bar
+   * A thin animated gold fill used to express quality / completion metrics
+   * (satisfaction rate, insurance approval rate, etc.) instead of bare numbers.
+   * Width is set inline per-instance via the --fill custom property.
+   */
+  .quality-bar {
+    position: relative;
+    height: 4px;
+    border-radius: 999px;
+    background: oklch(25% 0.01 0);
+    overflow: hidden;
+  }
+
+  .quality-bar__fill {
+    position: absolute;
+    inset: 0;
+    width: var(--fill, 0%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform-origin: left center;
+  }
+
+  /**
+   * Diagonal Section Divider
+   * A subtle angled seam between stacked sections, replacing the plain
+   * horizontal rule. Sits on the bottom edge of a section.
+   */
+  .diagonal-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 48px;
+    background: inherit;
+    clip-path: polygon(0 100%, 100% 40%, 100% 100%);
+    pointer-events: none;
+  }
+
+  /**
+   * Numbered Marker
+   * Bespoke index/step numeral treatment - a thin gold-outlined numeral
+   * instead of a generic icon-in-circle, used for editorial list rows.
+   */
+  .numbered-marker {
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    color: var(--primary);
+    opacity: 0.55;
+    letter-spacing: 0.02em;
   }
 }

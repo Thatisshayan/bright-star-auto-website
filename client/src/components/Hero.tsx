@@ -1,8 +1,16 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Star, Phone } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  // Background image drifts slightly slower than scroll (transform-only, no layout thrash)
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+
   const [vehiclesCount, setVehiclesCount] = useState(0);
   const [satisfactionCount, setSatisfactionCount] = useState(0);
 
@@ -35,17 +43,18 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center pt-20 md:pt-28 overflow-hidden">
+      {/* Background Image with Overlay - subtle parallax drift on scroll */}
+      <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         <img
-          src="/manus-storage/hero-background_eccec15e.png"
-          alt="Auto bodyshop workspace"
-          className="w-full h-full object-cover"
+          src="/gallery/hero-orange-car.jpg"
+          alt="Freshly restored vehicle by Bright Star Auto in North York"
+          fetchPriority="high"
+          className="w-full h-[120%] object-cover object-[center_30%]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/60" />
-      </div>
+      </motion.div>
 
       {/* Animated Particles Background */}
       <div className="absolute inset-0 z-0 noise-overlay" />
@@ -87,26 +96,29 @@ export default function Hero() {
             Expert collision repair, paint refinishing, and restoration. Insurance-approved. Free estimates. Your vehicle deserves the best.
           </motion.p>
 
-          {/* Stats */}
+          {/* Stats - plain divided row, compact */}
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10"
+            className="corner-accent flex flex-wrap gap-x-6 gap-y-3 mb-10 py-4 px-1 divide-x divide-white/15"
             variants={itemVariants}
           >
-            <div className="bg-gradient-to-br from-primary/20 to-primary/5 backdrop-blur-sm border border-primary/30 rounded-lg p-4">
-              <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <div className="pr-6">
+              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 {vehiclesCount}+
               </div>
-              <div className="text-sm text-foreground/70">Vehicles Restored</div>
+              <div className="text-xs text-foreground/70">Vehicles Restored</div>
             </div>
-            <div className="bg-gradient-to-br from-primary/20 to-primary/5 backdrop-blur-sm border border-primary/30 rounded-lg p-4">
-              <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">4.9★</div>
-              <div className="text-sm text-foreground/70">61+ Reviews</div>
+            <div className="pr-6 pl-6">
+              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center gap-1">
+                4.9
+                <Star size={16} className="fill-accent text-accent" aria-hidden="true" />
+              </div>
+              <div className="text-xs text-foreground/70">61+ Reviews</div>
             </div>
-            <div className="bg-gradient-to-br from-primary/20 to-primary/5 backdrop-blur-sm border border-primary/30 rounded-lg p-4">
-              <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <div className="pl-6">
+              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 {satisfactionCount}%
               </div>
-              <div className="text-sm text-foreground/70">Satisfaction</div>
+              <div className="text-xs text-foreground/70">Satisfaction</div>
             </div>
           </motion.div>
 
@@ -136,17 +148,12 @@ export default function Hero() {
 
           {/* Social Proof */}
           <motion.div
-            className="mt-12 flex items-center gap-4 text-sm text-foreground/80"
+            className="mt-10 flex items-center gap-3 text-sm text-foreground/80"
             variants={itemVariants}
           >
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/40 to-primary/20 border-2 border-background flex items-center justify-center text-xs font-bold text-accent"
-                >
-                  ★
-                </div>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={16} className="fill-primary text-primary" />
               ))}
             </div>
             <span>

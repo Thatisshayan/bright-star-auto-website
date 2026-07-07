@@ -3,34 +3,34 @@ import { Eye } from "lucide-react";
 
 const galleryItems = [
   {
-    image: "/manus-storage/collision-repair_268634f7.png",
+    image: "/gallery/stock-shopfloor.jpg",
     title: "Collision Repair",
-    category: "Structural",
+    category: "Our Facility",
   },
   {
-    image: "/manus-storage/paint-booth_953dde27.png",
-    title: "Paint Refinishing",
+    image: "/gallery/stock-paintbooth.jpg",
+    title: "Paint & Refinishing",
+    category: "Spray Booth",
+  },
+  {
+    image: "/gallery/stock-structural.jpg",
+    title: "Structural Repair",
+    category: "In Progress",
+  },
+  {
+    image: "/gallery/stock-polishing.jpg",
+    title: "Paint Correction",
     category: "Finishing",
   },
   {
-    image: "/manus-storage/technician-work_bfc4a8c3.png",
-    title: "Expert Craftsmanship",
+    image: "/gallery/stock-detailing.jpg",
+    title: "Auto Detailing",
     category: "Precision",
   },
   {
-    image: "/manus-storage/collision-repair_268634f7.png",
-    title: "Frame Straightening",
-    category: "Structural",
-  },
-  {
-    image: "/manus-storage/paint-booth_953dde27.png",
-    title: "Quality Assurance",
-    category: "Inspection",
-  },
-  {
-    image: "/manus-storage/technician-work_bfc4a8c3.png",
-    title: "Professional Results",
-    category: "Finishing",
+    image: "/gallery/stock-wheelwork.jpg",
+    title: "Wheel & Suspension",
+    category: "Precision Work",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function Gallery() {
   return (
     <section className="section-spacing bg-card/50 relative overflow-hidden">
       <div className="absolute inset-0 noise-overlay" />
-      
+
       <div className="container relative z-10">
         {/* Header */}
         <motion.div
@@ -61,11 +61,14 @@ export default function Gallery() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          <span className="signature-underline text-xs font-semibold text-primary tracking-[0.25em] uppercase mb-4">
+            Inside The Shop
+          </span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mt-4 mb-4">
             Our Work
           </h2>
           <p className="text-lg text-foreground/70">
-            See the quality and precision of our auto bodyshop craftsmanship.
+            The equipment, process, and finish quality behind every job we take on.
           </p>
         </motion.div>
 
@@ -82,30 +85,29 @@ export default function Gallery() {
               key={index}
               className="group relative overflow-hidden rounded-xl aspect-square cursor-pointer"
               variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
             >
               {/* Image */}
               <img
                 src={item.image}
                 alt={item.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Content */}
-              <motion.div
-                className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ y: 20 }}
-                whileHover={{ y: 0 }}
-              >
-                <Eye size={32} className="text-primary mb-4" />
-                <h3 className="text-lg font-semibold text-white text-center">
+              {/* Content - anchored bottom-left, no card box */}
+              <div className="absolute inset-x-0 bottom-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Eye size={14} />
+                  {item.category}
+                </div>
+                <h3 className="text-lg font-display font-bold text-white">
                   {item.title}
                 </h3>
-                <p className="text-sm text-foreground/70 mt-2">{item.category}</p>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -119,12 +121,12 @@ export default function Gallery() {
           viewport={{ once: true }}
         >
           <motion.a
-            href="#contact"
+            href="/#contact"
             className="inline-block px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/50 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            See More Work
+            Get a Free Estimate
           </motion.a>
         </motion.div>
       </div>

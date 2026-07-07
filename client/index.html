@@ -13,21 +13,25 @@
     <meta property="og:description" content="North York's premier auto bodyshop. Expert collision repair, paint refinishing, and restoration." />
     <meta property="og:type" content="business.business" />
     <meta property="og:url" content="https://brightstarauto.net" />
+    <meta property="og:image" content="https://brightstarauto.net/brand/logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Bright Star Auto Ltd - Premium Auto Bodyshop" />
     <meta name="twitter:description" content="Expert collision repair, paint refinishing, and restoration in North York." />
+    <meta name="twitter:image" content="https://brightstarauto.net/brand/logo.png" />
     <title>Bright Star Auto Ltd | Premium Auto Bodyshop North York, ON</title>    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="/gallery/hero-orange-car.jpg" fetchpriority="high" />
+    <link rel="icon" type="image/png" href="/brand/logo.png" />
+    <link rel="apple-touch-icon" href="/brand/logo.png" />
     <link rel="canonical" href="https://brightstarauto.net" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Bright Star Auto Ltd",
-      "image": "https://brightstarauto.net/logo.png",
+      "image": "https://brightstarauto.net/brand/logo.png",
       "description": "Premium auto bodyshop offering collision repair, paint refinishing, dent removal, and frame straightening.",
       "address": {
         "@type": "PostalAddress",
@@ -65,6 +69,17 @@
 
   <body>
     <div id="root"></div>
+    <!-- Static replica of the React contact form so Netlify's build-time bot
+         can detect and register it (Netlify Forms only scans static HTML). -->
+    <!-- netlify-forms-detect: 2026-07-06T21:30:00Z -->
+    <form name="contact" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <input type="text" name="vehicle" />
+      <input type="text" name="service" />
+      <textarea name="message"></textarea>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
     <script
       defer
