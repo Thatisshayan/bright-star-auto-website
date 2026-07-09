@@ -69,7 +69,10 @@ export default function MarqueeTicker() {
         <p className="container text-center text-xs font-semibold tracking-[0.2em] text-foreground/40 uppercase mb-6">
           Approved &amp; trusted by leading insurance providers
         </p>
-        <div className="marquee flex items-center whitespace-nowrap w-max" style={{ animationDuration: "28s" }}>
+        <div
+          className="marquee flex items-center whitespace-nowrap w-max"
+          style={{ animationDuration: "28s" }}
+        >
           {[...insurers, ...insurers].map((ins, i) => (
             <LogoTile key={i} name={ins.name} src={ins.src} />
           ))}
@@ -81,7 +84,10 @@ export default function MarqueeTicker() {
         <p className="container text-center text-xs font-semibold tracking-[0.2em] text-foreground/40 uppercase mb-6">
           We repair all makes &amp; models
         </p>
-        <div className="marquee flex items-center whitespace-nowrap w-max" style={{ animationDuration: "34s" }}>
+        <div
+          className="marquee flex items-center whitespace-nowrap w-max"
+          style={{ animationDuration: "34s" }}
+        >
           {[...makes, ...makes].map((make, i) => (
             <LogoTile key={i} name={make.name} src={make.src} />
           ))}

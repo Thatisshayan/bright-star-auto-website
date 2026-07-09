@@ -1,36 +1,49 @@
 import { motion } from "framer-motion";
-import { Wrench, Droplet, Hammer, AlertCircle, FileCheck, Sparkles } from "lucide-react";
+import {
+  Wrench,
+  Droplet,
+  Hammer,
+  AlertCircle,
+  FileCheck,
+  Sparkles,
+} from "lucide-react";
 
 const services = [
   {
     icon: Wrench,
     title: "Collision Repair",
-    description: "Expert damage assessment and structural repair using precision tools and techniques.",
+    description:
+      "Expert damage assessment and structural repair using precision tools and techniques.",
   },
   {
     icon: Droplet,
     title: "Paint & Refinishing",
-    description: "Professional color matching and multi-layer paint application for flawless finishes.",
+    description:
+      "Professional color matching and multi-layer paint application for flawless finishes.",
   },
   {
     icon: Hammer,
     title: "Dent Removal",
-    description: "Paintless dent repair and scratch removal without compromising original paint.",
+    description:
+      "Paintless dent repair and scratch removal without compromising original paint.",
   },
   {
     icon: AlertCircle,
     title: "Frame Straightening",
-    description: "Precision frame alignment and structural restoration for safety and performance.",
+    description:
+      "Precision frame alignment and structural restoration for safety and performance.",
   },
   {
     icon: FileCheck,
     title: "Insurance Claims",
-    description: "Hassle-free insurance coordination and documentation for your peace of mind.",
+    description:
+      "Hassle-free insurance coordination and documentation for your peace of mind.",
   },
   {
     icon: Sparkles,
     title: "Auto Detailing",
-    description: "Premium polishing and detailing to restore your vehicle's showroom shine.",
+    description:
+      "Premium polishing and detailing to restore your vehicle's showroom shine.",
   },
 ];
 
@@ -41,7 +54,10 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="section-spacing bg-background relative overflow-hidden">
+    <section
+      id="services"
+      className="section-spacing bg-background relative overflow-hidden"
+    >
       <div className="absolute inset-0 noise-overlay" />
 
       <div className="container relative z-10">
@@ -62,7 +78,8 @@ export default function Services() {
                 Our Services
               </h2>
               <p className="text-lg text-foreground/70 max-w-sm">
-                One shop, every stage of the repair — from first estimate to final polish.
+                One shop, every stage of the repair — from first estimate to
+                final polish.
               </p>
             </div>
           </motion.div>

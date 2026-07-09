@@ -1,9 +1,16 @@
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Linkedin, Phone, Mail, Navigation } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Phone,
+  Mail,
+  Navigation,
+} from "lucide-react";
+import { BUSINESS } from "@shared/const";
 
-const ADDRESS = "51 Toro Road North, Unit 3, North York, ON M3J 2A4";
-const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(ADDRESS)}&z=15&output=embed`;
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ADDRESS)}`;
+const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(BUSINESS.address.full)}&z=15&output=embed`;
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(BUSINESS.address.full)}`;
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -44,12 +51,19 @@ export default function Footer() {
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                <img src="/brand/logo.png" alt="Bright Star Auto" className="w-full h-full object-cover scale-125" />
+                <img
+                  src="/brand/logo.png"
+                  alt="Bright Star Auto"
+                  className="w-full h-full object-cover scale-125"
+                />
               </div>
-              <span className="font-display font-bold text-white">BRIGHT STAR</span>
+              <span className="font-display font-bold text-white">
+                BRIGHT STAR
+              </span>
             </div>
             <p className="text-sm text-foreground/60">
-              Collision repair, paint refinishing, and restoration for North York drivers — done right, insurance-approved.
+              Collision repair, paint refinishing, and restoration for North
+              York drivers — done right, insurance-approved.
             </p>
           </motion.div>
 
@@ -60,14 +74,20 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold text-white mb-4 pb-2 border-b border-primary/20 inline-block">Quick Links</h4>
+            <h4 className="font-semibold text-white mb-4 pb-2 border-b border-primary/20 inline-block">
+              Quick Links
+            </h4>
             <ul className="space-y-2 text-sm">
               {[
                 { label: "Services", href: "/services" },
+                { label: "Gallery", href: "/gallery" },
+                { label: "Blog", href: "/blog" },
+                { label: "FAQ", href: "/faq" },
+                { label: "Track My Repair", href: "/track-repair" },
                 { label: "About", href: "/about" },
                 { label: "Reviews", href: "/#reviews" },
                 { label: "Contact", href: "/#contact" },
-              ].map((link) => (
+              ].map(link => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -87,14 +107,16 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold text-white mb-4 pb-2 border-b border-primary/20 inline-block">Services</h4>
+            <h4 className="font-semibold text-white mb-4 pb-2 border-b border-primary/20 inline-block">
+              Services
+            </h4>
             <ul className="space-y-2 text-sm">
               {[
                 "Collision Repair",
                 "Paint & Refinishing",
                 "Structural Repair",
                 "Mechanical & Electrical",
-              ].map((service) => (
+              ].map(service => (
                 <li key={service}>
                   <a
                     href="/services"
@@ -114,21 +136,26 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold text-white mb-4 pb-2 border-b border-primary/20 inline-block">Contact</h4>
+            <h4 className="font-semibold text-white mb-4 pb-2 border-b border-primary/20 inline-block">
+              Contact
+            </h4>
             <div className="space-y-3 text-sm">
+              {BUSINESS.phones.map(phone => (
+                <a
+                  key={phone.href}
+                  href={phone.href}
+                  className="flex items-center gap-2 text-foreground/60 hover:text-primary transition-colors"
+                >
+                  <Phone size={16} />
+                  {phone.display}
+                </a>
+              ))}
               <a
-                href="tel:+14166350812"
-                className="flex items-center gap-2 text-foreground/60 hover:text-primary transition-colors"
-              >
-                <Phone size={16} />
-                +1 (416) 635-0812
-              </a>
-              <a
-                href="mailto:Brightstarautoltd@gmail.com"
+                href={`mailto:${BUSINESS.email}`}
                 className="flex items-center gap-2 text-foreground/60 hover:text-primary transition-colors"
               >
                 <Mail size={16} />
-                Brightstarautoltd@gmail.com
+                {BUSINESS.email}
               </a>
             </div>
           </motion.div>
@@ -161,9 +188,21 @@ export default function Footer() {
                 placeholders until the business owner supplies Facebook,
                 Instagram, and LinkedIn profile links. */}
             {[
-              { icon: Facebook, href: undefined, label: "Facebook (coming soon)" },
-              { icon: Instagram, href: undefined, label: "Instagram (coming soon)" },
-              { icon: Linkedin, href: undefined, label: "LinkedIn (coming soon)" },
+              {
+                icon: Facebook,
+                href: undefined,
+                label: "Facebook (coming soon)",
+              },
+              {
+                icon: Instagram,
+                href: undefined,
+                label: "Instagram (coming soon)",
+              },
+              {
+                icon: Linkedin,
+                href: undefined,
+                label: "LinkedIn (coming soon)",
+              },
             ].map((social, i) => {
               const Icon = social.icon;
               return (
@@ -191,10 +230,16 @@ export default function Footer() {
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <a href="#" className="hover:text-foreground/70 transition-colors">
+          <a
+            href="/privacy-policy"
+            className="hover:text-foreground/70 transition-colors"
+          >
             Privacy Policy
           </a>
-          <a href="#" className="hover:text-foreground/70 transition-colors">
+          <a
+            href="/terms-of-service"
+            className="hover:text-foreground/70 transition-colors"
+          >
             Terms of Service
           </a>
         </motion.div>

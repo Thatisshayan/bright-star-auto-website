@@ -17,10 +17,10 @@ export default function Hero() {
   useEffect(() => {
     // Animate counters on mount
     const vehiclesInterval = setInterval(() => {
-      setVehiclesCount((prev) => (prev < 500 ? prev + 10 : 500));
+      setVehiclesCount(prev => (prev < 500 ? prev + 10 : 500));
     }, 20);
     const satisfactionInterval = setInterval(() => {
-      setSatisfactionCount((prev) => (prev < 98 ? prev + 2 : 98));
+      setSatisfactionCount(prev => (prev < 98 ? prev + 2 : 98));
     }, 20);
 
     return () => {
@@ -43,7 +43,10 @@ export default function Hero() {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center pt-20 md:pt-28 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center pt-20 md:pt-28 overflow-hidden"
+    >
       {/* Background Image with Overlay - subtle parallax drift on scroll */}
       <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         <img
@@ -85,7 +88,9 @@ export default function Hero() {
           >
             Restore Your Car.
             <br />
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Reclaim Your Road.</span>
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Reclaim Your Road.
+            </span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -93,7 +98,8 @@ export default function Hero() {
             className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl leading-relaxed"
             variants={itemVariants}
           >
-            Expert collision repair, paint refinishing, and restoration. Insurance-approved. Free estimates. Your vehicle deserves the best.
+            Expert collision repair, paint refinishing, and restoration.
+            Insurance-approved. Free estimates. Your vehicle deserves the best.
           </motion.p>
 
           {/* Stats - plain divided row, compact */}
@@ -105,12 +111,18 @@ export default function Hero() {
               <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 {vehiclesCount}+
               </div>
-              <div className="text-xs text-foreground/70">Vehicles Restored</div>
+              <div className="text-xs text-foreground/70">
+                Vehicles Restored
+              </div>
             </div>
             <div className="pr-6 pl-6">
               <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center gap-1">
                 4.9
-                <Star size={16} className="fill-accent text-accent" aria-hidden="true" />
+                <Star
+                  size={16}
+                  className="fill-accent text-accent"
+                  aria-hidden="true"
+                />
               </div>
               <div className="text-xs text-foreground/70">61+ Reviews</div>
             </div>
@@ -157,7 +169,8 @@ export default function Hero() {
               ))}
             </div>
             <span>
-              Trusted by hundreds of North York drivers. <strong className="text-primary">Available today.</strong>
+              Trusted by hundreds of North York drivers.{" "}
+              <strong className="text-primary">Available today.</strong>
             </span>
           </motion.div>
         </motion.div>

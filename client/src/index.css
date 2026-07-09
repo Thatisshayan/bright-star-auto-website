@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -55,10 +56,10 @@
   /* Typography */
   --font-display: "Oswald", sans-serif;
   --font-body: "Inter", sans-serif;
-  
+
   /* Spacing & Radius */
   --radius: 0.75rem;
-  
+
   /* OKLCH Color Palette - Dark Automotive Premium Theme */
   /* Background & Surface - DEEPER BLACK for luxury */
   --background: oklch(6% 0 0); /* Ultra-deep black #050505 */
@@ -67,7 +68,7 @@
   --card-foreground: oklch(97% 0 0);
   --popover: oklch(10% 0 0);
   --popover-foreground: oklch(97% 0 0);
-  
+
   /* Primary (True Gold Accent) - hue 88 reads as gold, not orange (hue 75 skews orange) */
   --primary: oklch(68% 0.135 80); /* Rich Gold #C9A24A */
   --primary-foreground: oklch(6% 0 0); /* Deep text on gold */
@@ -83,11 +84,11 @@
   /* Accent (Gold Glow) - brighter but still gold, not amber/orange */
   --accent: oklch(78% 0.15 82); /* Vibrant champagne gold for emphasis */
   --accent-foreground: oklch(6% 0 0);
-  
+
   /* Destructive */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  
+
   /* Borders & Input */
   --border: oklch(15% 0.01 0);
   --input: oklch(12% 0.01 0);
@@ -107,7 +108,7 @@
   --sidebar-accent-foreground: oklch(6% 0 0);
   --sidebar-border: oklch(15% 0.01 0);
   --sidebar-ring: oklch(68% 0.135 80);
-  
+
   /* Animation Easings */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -143,48 +144,53 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* Typography System */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: 0.01em;
     line-height: 1.15;
   }
-  
+
   h1 {
     font-size: clamp(2.5rem, 8vw, 4rem);
   }
-  
+
   h2 {
     font-size: clamp(2rem, 6vw, 3rem);
   }
-  
+
   h3 {
     font-size: clamp(1.5rem, 4vw, 2rem);
   }
-  
+
   h4 {
     font-size: clamp(1.25rem, 3vw, 1.5rem);
   }
-  
+
   p {
     font-size: clamp(0.95rem, 2vw, 1.1rem);
     line-height: 1.6;
     letter-spacing: 0.3px;
   }
-  
+
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -229,7 +235,7 @@
       max-width: 1280px;
     }
   }
-  
+
   /* Premium Button Styles */
   .btn-primary {
     @apply px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg;
@@ -238,37 +244,37 @@
     @apply active:scale-95;
     @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
   }
-  
+
   .btn-secondary {
     @apply px-6 py-3 bg-transparent border-2 border-primary text-primary font-semibold rounded-lg;
     @apply transition-all duration-200 ease-out;
     @apply hover:bg-primary/10 hover:border-accent;
     @apply active:scale-95;
   }
-  
+
   /* Gold Glow Effect */
   .glow-gold {
     @apply shadow-lg shadow-primary/50;
   }
-  
+
   .glow-gold-hover {
     @apply transition-all duration-300;
   }
-  
+
   .glow-gold-hover:hover {
     @apply shadow-xl shadow-accent/60;
   }
-  
+
   /* Glassmorphism Card */
   .card-glass {
     @apply bg-card/40 backdrop-blur-xl border border-white/10 rounded-xl;
   }
-  
+
   /* Section Spacing */
   .section-spacing {
     @apply py-16 md:py-24 lg:py-32;
   }
-  
+
   /* Marquee Animation - content is always duplicated 2x by the consumer,
      so translating by exactly -50% (one full copy's width) loops seamlessly
      with no jump/reset glitch. */
@@ -288,43 +294,43 @@
   .marquee:hover {
     animation-play-state: paused;
   }
-  
+
   /* Noise Texture Overlay */
   .noise-overlay {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/></filter><rect width="100" height="100" fill="rgba(255,255,255,0.02)" filter="url(%23noise)"/></svg>');
     background-size: 100px 100px;
   }
-  
+
   /* Scroll Reveal Animation */
   .scroll-reveal {
     opacity: 0;
     transform: translateY(20px);
   }
-  
+
   /* Smooth Scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: oklch(8% 0 0);
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: oklch(70% 0.20 75);
+    background: oklch(70% 0.2 75);
     border-radius: 5px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: oklch(82% 0.24 75);
   }
-  
+
   /* Focus Visible Styles */
   :focus-visible {
-    outline: 2px solid oklch(70% 0.20 75);
+    outline: 2px solid oklch(70% 0.2 75);
     outline-offset: 2px;
   }
-  
+
   /* Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -355,7 +361,9 @@
     border-color: var(--primary);
     opacity: 0.7;
     pointer-events: none;
-    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.3s var(--ease-out);
   }
 
   .corner-accent::before {

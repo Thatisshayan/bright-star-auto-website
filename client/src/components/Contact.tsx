@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, CheckCircle2, Loader2 } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  CheckCircle2,
+  Loader2,
+} from "lucide-react";
+import { BUSINESS } from "@shared/const";
 
-function encode(data: Record<string, string>) {
+export function encode(data: Record<string, string>) {
   return Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join("&");
 }
 
@@ -16,8 +24,11 @@ export default function Contact() {
     vehicle: "",
     service: "",
     message: "",
+    "bot-field": "", // honeypot: real users never fill this in, bots often do
   });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -25,11 +36,18 @@ export default function Contact() {
     >
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Silently drop suspected bot submissions instead of surfacing an error.
+    if (formData["bot-field"]) {
+      setStatus("success");
+      return;
+    }
+
     setStatus("submitting");
     try {
       // Netlify Forms: a static replica of this form lives in index.html
@@ -40,7 +58,15 @@ export default function Contact() {
         body: encode({ "form-name": "contact", ...formData }),
       });
       setStatus("success");
-      setFormData({ name: "", phone: "", email: "", vehicle: "", service: "", message: "" });
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        vehicle: "",
+        service: "",
+        message: "",
+        "bot-field": "",
+      });
     } catch {
       setStatus("error");
     }
@@ -65,9 +91,10 @@ export default function Contact() {
       label: "Location",
       content: (
         <>
-          51 Toro Road North, Unit #3
+          {BUSINESS.address.street}
           <br />
-          North York, ON M3J 2A4
+          {BUSINESS.address.city}, {BUSINESS.address.region}{" "}
+          {BUSINESS.address.postalCode}
         </>
       ),
     },
@@ -76,13 +103,17 @@ export default function Contact() {
       label: "Phone",
       content: (
         <>
-          <a href="tel:+14166350812" className="hover:text-primary transition-colors">
-            +1 (416) 635-0812
-          </a>
-          <br />
-          <a href="tel:+14168339252" className="hover:text-primary transition-colors">
-            +1 (416) 833-9252
-          </a>
+          {BUSINESS.phones.map((phone, i) => (
+            <span key={phone.href}>
+              <a
+                href={phone.href}
+                className="hover:text-primary transition-colors"
+              >
+                {phone.display}
+              </a>
+              {i < BUSINESS.phones.length - 1 && <br />}
+            </span>
+          ))}
         </>
       ),
     },
@@ -90,8 +121,11 @@ export default function Contact() {
       icon: Mail,
       label: "Email",
       content: (
-        <a href="mailto:Brightstarautoltd@gmail.com" className="hover:text-primary transition-colors">
-          Brightstarautoltd@gmail.com
+        <a
+          href={`mailto:${BUSINESS.email}`}
+          className="hover:text-primary transition-colors"
+        >
+          {BUSINESS.email}
         </a>
       ),
     },
@@ -100,11 +134,11 @@ export default function Contact() {
       label: "Hours",
       content: (
         <>
-          Mon &ndash; Fri: 9:00 AM &ndash; 6:00 PM
+          Mon &ndash; Fri: {BUSINESS.hours.weekday}
           <br />
-          Sat: 9:00 AM &ndash; 4:00 PM
+          Sat: {BUSINESS.hours.saturday}
           <br />
-          Sun: Closed
+          Sun: {BUSINESS.hours.sunday}
         </>
       ),
     },
@@ -112,7 +146,10 @@ export default function Contact() {
 
   if (status === "success") {
     return (
-      <section id="contact" className="section-spacing bg-background relative overflow-hidden">
+      <section
+        id="contact"
+        className="section-spacing bg-background relative overflow-hidden"
+      >
         <div className="absolute inset-0 noise-overlay" />
         <div className="container relative z-10">
           <motion.div
@@ -126,7 +163,8 @@ export default function Contact() {
               Request Received
             </h2>
             <p className="text-foreground/70 mb-8">
-              Thanks for reaching out — we'll call or email you back shortly to confirm your free estimate.
+              Thanks for reaching out — we'll call or email you back shortly to
+              confirm your free estimate.
             </p>
             <button
               onClick={() => setStatus("idle")}
@@ -141,7 +179,10 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section-spacing bg-background relative overflow-hidden">
+    <section
+      id="contact"
+      className="section-spacing bg-background relative overflow-hidden"
+    >
       <div className="absolute inset-0 noise-overlay" />
 
       <div className="container relative z-10">
@@ -160,7 +201,8 @@ export default function Contact() {
             Get in Touch
           </h2>
           <p className="text-lg text-foreground/70">
-            Tell us what happened and we'll get back to you with a straight answer, usually same-day.
+            Tell us what happened and we'll get back to you with a straight
+            answer, usually same-day.
           </p>
         </motion.div>
 
@@ -190,7 +232,10 @@ export default function Contact() {
               />
             </motion.div>
 
-            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-6">
+            <motion.div
+              variants={itemVariants}
+              className="grid grid-cols-2 gap-6"
+            >
               <div>
                 <label className="block text-sm font-semibold text-white mb-2">
                   Phone
@@ -245,13 +290,27 @@ export default function Contact() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white focus:border-primary focus:outline-none transition-all"
               >
-                <option className="bg-card" value="">Select a service</option>
-                <option className="bg-card" value="Collision Repair">Collision Repair</option>
-                <option className="bg-card" value="Paint & Refinishing">Paint & Refinishing</option>
-                <option className="bg-card" value="Dent Removal">Dent Removal</option>
-                <option className="bg-card" value="Frame Straightening">Frame Straightening</option>
-                <option className="bg-card" value="Insurance Claims">Insurance Claims</option>
-                <option className="bg-card" value="Auto Detailing">Auto Detailing</option>
+                <option className="bg-card" value="">
+                  Select a service
+                </option>
+                <option className="bg-card" value="Collision Repair">
+                  Collision Repair
+                </option>
+                <option className="bg-card" value="Paint & Refinishing">
+                  Paint & Refinishing
+                </option>
+                <option className="bg-card" value="Dent Removal">
+                  Dent Removal
+                </option>
+                <option className="bg-card" value="Frame Straightening">
+                  Frame Straightening
+                </option>
+                <option className="bg-card" value="Insurance Claims">
+                  Insurance Claims
+                </option>
+                <option className="bg-card" value="Auto Detailing">
+                  Auto Detailing
+                </option>
               </select>
             </motion.div>
 
@@ -269,11 +328,31 @@ export default function Contact() {
               />
             </motion.div>
 
+            {/* Honeypot field: hidden from real users via CSS, but visible to
+                most scraping bots that fill in every input they see. */}
+            <p className="hidden" aria-hidden="true">
+              <label>
+                Leave this field empty
+                <input
+                  type="text"
+                  name="bot-field"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData["bot-field"]}
+                  onChange={handleChange}
+                />
+              </label>
+            </p>
+
             {status === "error" && (
-              <motion.p variants={itemVariants} className="text-destructive text-sm">
-                Something went wrong sending your request. Please call us directly at{" "}
-                <a href="tel:+14166350812" className="underline">
-                  (416) 635-0812
+              <motion.p
+                variants={itemVariants}
+                className="text-destructive text-sm"
+              >
+                Something went wrong sending your request. Please call us
+                directly at{" "}
+                <a href={BUSINESS.phones[0].href} className="underline">
+                  {BUSINESS.phones[0].display}
                 </a>
                 .
               </motion.p>
@@ -309,11 +388,19 @@ export default function Contact() {
             {infoItems.map((item, i) => {
               const Icon = item.icon;
               return (
-                <motion.div key={i} className="flex gap-5 py-6 first:pt-0" variants={itemVariants}>
+                <motion.div
+                  key={i}
+                  className="flex gap-5 py-6 first:pt-0"
+                  variants={itemVariants}
+                >
                   <Icon size={22} className="text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-white mb-1">{item.label}</h3>
-                    <p className="text-foreground/70 leading-relaxed">{item.content}</p>
+                    <h3 className="font-semibold text-white mb-1">
+                      {item.label}
+                    </h3>
+                    <p className="text-foreground/70 leading-relaxed">
+                      {item.content}
+                    </p>
                   </div>
                 </motion.div>
               );

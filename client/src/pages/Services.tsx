@@ -114,8 +114,8 @@ export default function ServicesPage() {
             </h1>
             <p className="text-lg text-foreground/70 max-w-2xl leading-relaxed">
               From a small dent to a full structural rebuild, our certified team
-              handles the entire repair — body, paint, mechanical, and electrical —
-              so you don't need to juggle multiple shops.
+              handles the entire repair — body, paint, mechanical, and
+              electrical — so you don't need to juggle multiple shops.
             </p>
           </motion.div>
         </div>

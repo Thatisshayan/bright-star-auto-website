@@ -116,10 +116,12 @@ interface MapViewProps {
   onMapReady?: (map: google.maps.Map) => void;
 }
 
+// Defaults to Bright Star Auto's North York location so a caller that
+// forgets to pass a center doesn't silently render an unrelated city.
 export function MapView({
   className,
-  initialCenter = { lat: 37.7749, lng: -122.4194 },
-  initialZoom = 12,
+  initialCenter = { lat: 43.7472, lng: -79.4801 },
+  initialZoom = 15,
   onMapReady,
 }: MapViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);

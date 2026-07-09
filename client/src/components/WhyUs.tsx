@@ -5,17 +5,20 @@ const pillars = [
   {
     icon: Users,
     title: "Expert Technicians",
-    description: "Certified professionals with 10+ years of automotive repair experience.",
+    description:
+      "Certified professionals with 10+ years of automotive repair experience.",
   },
   {
     icon: Award,
     title: "Insurance Approved",
-    description: "Trusted by major insurance companies for quality and reliability.",
+    description:
+      "Trusted by all insurance companies for quality and reliability.",
   },
   {
     icon: Zap,
     title: "Fast Turnaround",
-    description: "Efficient processes ensure your vehicle is back on the road quickly.",
+    description:
+      "Efficient processes ensure your vehicle is back on the road quickly.",
   },
   {
     icon: Shield,
@@ -46,7 +49,10 @@ export default function WhyUs() {
   };
 
   return (
-    <section id="why-us" className="section-spacing bg-card/50 relative overflow-hidden">
+    <section
+      id="why-us"
+      className="section-spacing bg-card/50 relative overflow-hidden"
+    >
       <div className="absolute inset-0 noise-overlay" />
 
       <div className="container relative z-10">
@@ -114,16 +120,26 @@ export default function WhyUs() {
               <div className="text-3xl md:text-4xl font-display font-bold text-primary mb-1 flex items-center justify-center gap-1">
                 {stat.number}
                 {stat.showStar && (
-                  <Star size={20} className="fill-primary text-primary" aria-hidden="true" />
+                  <Star
+                    size={20}
+                    className="fill-primary text-primary"
+                    aria-hidden="true"
+                  />
                 )}
               </div>
-              <div className="text-sm text-foreground/70 mb-3">{stat.label}</div>
+              <div className="text-sm text-foreground/70 mb-3">
+                {stat.label}
+              </div>
               <div className="quality-bar max-w-[100px] mx-auto">
                 <motion.div
                   className="quality-bar__fill"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 + i * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.2 + i * 0.1,
+                    ease: [0.23, 1, 0.32, 1],
+                  }}
                   viewport={{ once: true }}
                   style={{ ["--fill" as string]: stat.fill }}
                 />

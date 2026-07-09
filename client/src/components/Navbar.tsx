@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, MapPin, Clock } from "lucide-react";
+import { BUSINESS } from "@shared/const";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,8 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Services", href: "/services" },
-    { label: "Why Us", href: "/#why-us" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Blog", href: "/blog" },
     { label: "Reviews", href: "/#reviews" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/#contact" },
@@ -32,18 +34,24 @@ export default function Navbar() {
       {/* Utility bar - phone + address, desktop only, condensed */}
       <div
         className={`hidden md:block border-b border-white/10 transition-all duration-300 ${
-          isScrolled ? "h-0 opacity-0 overflow-hidden" : "bg-black/40 backdrop-blur-sm"
+          isScrolled
+            ? "h-0 opacity-0 overflow-hidden"
+            : "bg-black/40 backdrop-blur-sm"
         }`}
       >
         <div className="container flex items-center justify-between h-9 text-xs text-foreground/60">
           <div className="flex items-center gap-6">
-            <a href="tel:+14166350812" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+            <a
+              href={BUSINESS.phones[0].href}
+              className="flex items-center gap-1.5 hover:text-primary transition-colors"
+            >
               <Phone size={12} />
-              (416) 635-0812
+              {BUSINESS.phones[0].display}
             </a>
             <span className="flex items-center gap-1.5">
               <MapPin size={12} />
-              51 Toro Road North, North York, ON
+              {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
+              {BUSINESS.address.region}
             </span>
           </div>
           <span className="flex items-center gap-1.5">
@@ -87,7 +95,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <motion.a
                 key={link.label}
                 href={link.href}
@@ -133,11 +141,11 @@ export default function Navbar() {
           >
             <div className="container py-4 flex flex-col gap-4">
               <a
-                href="tel:+14166350812"
+                href={BUSINESS.phones[0].href}
                 className="flex items-center gap-2 text-sm text-foreground/70 pb-2 border-b border-white/10"
               >
                 <Phone size={14} />
-                (416) 635-0812
+                {BUSINESS.phones[0].display}
               </a>
               {navLinks.map((link, i) => (
                 <motion.a

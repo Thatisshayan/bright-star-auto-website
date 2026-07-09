@@ -59,9 +59,10 @@ export default function About() {
               run by people who care.
             </h1>
             <p className="text-lg text-foreground/70 max-w-2xl leading-relaxed">
-              Bright Star Auto is a North York collision repair and refinishing shop
-              built on a simple idea: your car deserves an honest, skilled repair —
-              and you deserve to be treated like a person, not a claim number.
+              Bright Star Auto is a North York collision repair and refinishing
+              shop built on a simple idea: your car deserves an honest, skilled
+              repair — and you deserve to be treated like a person, not a claim
+              number.
             </p>
           </motion.div>
         </div>
@@ -80,15 +81,17 @@ export default function About() {
           >
             <Quote size={40} className="text-primary/50 mx-auto mb-6" />
             <p className="text-xl md:text-2xl font-display text-white leading-snug mb-8">
-              "I didn't want to build just another body shop. I wanted a place where
-              people walk in stressed about an accident and walk out feeling like
-              someone actually had their back."
+              "I didn't want to build just another body shop. I wanted a place
+              where people walk in stressed about an accident and walk out
+              feeling like someone actually had their back."
             </p>
             <div className="inline-flex flex-col items-center">
               <span className="font-display text-lg font-bold text-primary tracking-wide">
-                AMIN ABBASI
+                AMIN
               </span>
-              <span className="text-sm text-foreground/60">Owner &amp; Founder, Bright Star Auto</span>
+              <span className="text-sm text-foreground/60">
+                Owner &amp; Founder, Bright Star Auto
+              </span>
             </div>
           </motion.div>
 
@@ -100,17 +103,18 @@ export default function About() {
             viewport={{ once: true }}
           >
             <p>
-              Amin founded Bright Star Auto with a hands-on, floor-level approach to
-              the business — he still knows the shop's regular customers by name, and
-              he's personally involved in the estimates and quality checks that go out
-              the door. That reputation for being knowledgeable, reliable, and honest
-              is what customers consistently point to when they talk about why they
-              keep coming back, and why they send their friends and family here too.
+              Amin founded Bright Star Auto with a hands-on, floor-level
+              approach to the business — he still knows the shop's regular
+              customers by name, and he's personally involved in the estimates
+              and quality checks that go out the door. That reputation for being
+              knowledgeable, reliable, and honest is what customers consistently
+              point to when they talk about why they keep coming back, and why
+              they send their friends and family here too.
             </p>
             <p>
               Under his direction, Bright Star Auto has grown into North York's
-              go-to shop for collision repair and refinishing — built one careful
-              repair, and one satisfied customer, at a time.
+              go-to shop for collision repair and refinishing — built one
+              careful repair, and one satisfied customer, at a time.
             </p>
           </motion.div>
         </div>
@@ -131,7 +135,8 @@ export default function About() {
               What We Stand For
             </h2>
             <p className="text-lg text-foreground/70">
-              The principles our team works by, on every vehicle that comes through the door.
+              The principles our team works by, on every vehicle that comes
+              through the door.
             </p>
           </motion.div>
 
@@ -209,7 +214,9 @@ export default function About() {
                 <h3 className="text-lg font-display font-bold text-white mb-2">
                   {member.role}
                 </h3>
-                <p className="text-sm text-foreground/70 leading-relaxed">{member.copy}</p>
+                <p className="text-sm text-foreground/70 leading-relaxed">
+                  {member.copy}
+                </p>
               </motion.div>
             ))}
           </div>

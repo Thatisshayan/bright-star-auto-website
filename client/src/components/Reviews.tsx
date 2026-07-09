@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import GoogleReviewsWidget from "@/components/GoogleReviewsWidget";
 
 const reviews = [
   {
@@ -40,7 +41,13 @@ const reviews = [
 // visually verifiable rather than plain text.
 function GoogleLogo({ size = 16 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" className="flex-shrink-0">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      aria-hidden="true"
+      className="flex-shrink-0"
+    >
       <path
         fill="#FFC107"
         d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"
@@ -68,25 +75,28 @@ export default function Reviews() {
   useEffect(() => {
     if (!autoplay) return;
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % reviews.length);
+      setCurrent(prev => (prev + 1) % reviews.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [autoplay]);
 
   const next = () => {
-    setCurrent((prev) => (prev + 1) % reviews.length);
+    setCurrent(prev => (prev + 1) % reviews.length);
     setAutoplay(false);
   };
 
   const prev = () => {
-    setCurrent((prev) => (prev - 1 + reviews.length) % reviews.length);
+    setCurrent(prev => (prev - 1 + reviews.length) % reviews.length);
     setAutoplay(false);
   };
 
   return (
-    <section id="reviews" className="section-spacing bg-card/50 relative overflow-hidden">
+    <section
+      id="reviews"
+      className="section-spacing bg-card/50 relative overflow-hidden"
+    >
       <div className="absolute inset-0 noise-overlay" />
-      
+
       <div className="container relative z-10">
         {/* Header */}
         <motion.div
@@ -103,7 +113,8 @@ export default function Reviews() {
             What Our Customers Say
           </h2>
           <p className="text-lg text-foreground/70">
-            Unedited feedback from drivers across North York, pulled straight from Google and Birdeye.
+            Unedited feedback from drivers across North York, pulled straight
+            from Google and Birdeye.
           </p>
         </motion.div>
 
@@ -143,7 +154,9 @@ export default function Reviews() {
                     {reviews[current].name}
                   </p>
                   <p className="text-sm text-foreground/60 flex items-center gap-1.5">
-                    {reviews[current].source === "Google" && <GoogleLogo size={14} />}
+                    {reviews[current].source === "Google" && (
+                      <GoogleLogo size={14} />
+                    )}
                     {reviews[current].source}
                   </p>
                 </div>
@@ -214,7 +227,11 @@ export default function Reviews() {
               <div className="text-sm font-bold text-primary flex items-center justify-center gap-1">
                 {badge.label}
                 {badge.showStar && (
-                  <Star size={12} className="fill-primary text-primary" aria-hidden="true" />
+                  <Star
+                    size={12}
+                    className="fill-primary text-primary"
+                    aria-hidden="true"
+                  />
                 )}
                 {badge.showStar && <span>Rating</span>}
               </div>
@@ -222,6 +239,8 @@ export default function Reviews() {
             </div>
           ))}
         </motion.div>
+
+        <GoogleReviewsWidget />
       </div>
     </section>
   );

@@ -68,7 +68,8 @@ export default function Gallery() {
             Our Work
           </h2>
           <p className="text-lg text-foreground/70">
-            The equipment, process, and finish quality behind every job we take on.
+            The equipment, process, and finish quality behind every job we take
+            on.
           </p>
         </motion.div>
 

@@ -24,15 +24,21 @@ export default function SEO({ title, description }: SEOProps) {
     const previousOgTitle = ogTitleTag?.getAttribute("content") ?? null;
     ogTitleTag?.setAttribute("content", title);
 
-    const ogDescriptionTag = document.querySelector('meta[property="og:description"]');
-    const previousOgDescription = ogDescriptionTag?.getAttribute("content") ?? null;
+    const ogDescriptionTag = document.querySelector(
+      'meta[property="og:description"]'
+    );
+    const previousOgDescription =
+      ogDescriptionTag?.getAttribute("content") ?? null;
     ogDescriptionTag?.setAttribute("content", description);
 
     return () => {
       document.title = previousTitle;
-      if (previousDescription !== null) descriptionTag?.setAttribute("content", previousDescription);
-      if (previousOgTitle !== null) ogTitleTag?.setAttribute("content", previousOgTitle);
-      if (previousOgDescription !== null) ogDescriptionTag?.setAttribute("content", previousOgDescription);
+      if (previousDescription !== null)
+        descriptionTag?.setAttribute("content", previousDescription);
+      if (previousOgTitle !== null)
+        ogTitleTag?.setAttribute("content", previousOgTitle);
+      if (previousOgDescription !== null)
+        ogDescriptionTag?.setAttribute("content", previousOgDescription);
     };
   }, [title, description]);
 

@@ -76,7 +76,11 @@ export default function Process() {
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div key={index} variants={itemVariants} className="relative text-center lg:text-left">
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="relative text-center lg:text-left"
+              >
                 {/* Icon with number */}
                 <div className="relative inline-flex mb-6">
                   <motion.div
