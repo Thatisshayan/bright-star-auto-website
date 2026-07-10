@@ -234,7 +234,7 @@ export default function Contact() {
 
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
             >
               <div>
                 <label className="block text-sm font-semibold text-white mb-2">

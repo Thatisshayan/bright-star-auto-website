@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, Star, Phone } from "lucide-react";
+import { ChevronDown, Star, Phone, ShieldCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function Hero() {
@@ -17,10 +17,10 @@ export default function Hero() {
   useEffect(() => {
     // Animate counters on mount
     const vehiclesInterval = setInterval(() => {
-      setVehiclesCount(prev => (prev < 500 ? prev + 10 : 500));
+      setVehiclesCount(prev => (prev < 1000 ? prev + 20 : 1000));
     }, 20);
     const satisfactionInterval = setInterval(() => {
-      setSatisfactionCount(prev => (prev < 98 ? prev + 2 : 98));
+      setSatisfactionCount(prev => (prev < 99.98 ? prev + 2 : 99.98));
     }, 20);
 
     return () => {
@@ -70,16 +70,28 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/30 border border-primary/60 rounded-full mb-6 backdrop-blur-sm"
-            variants={itemVariants}
-          >
-            <Star size={16} className="text-accent" />
-            <span className="text-sm font-semibold text-accent">
-              North York's Premier Auto Bodyshop
-            </span>
-          </motion.div>
+          {/* Badges */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary/30 border border-primary/60 rounded-full backdrop-blur-sm"
+              variants={itemVariants}
+            >
+              <Star size={16} className="text-accent" />
+              <span className="text-sm font-semibold text-accent">
+                North York's Premier Auto Bodyshop
+              </span>
+            </motion.div>
+
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/15 rounded-full backdrop-blur-sm"
+              variants={itemVariants}
+            >
+              <ShieldCheck size={16} className="text-primary" />
+              <span className="text-sm font-semibold text-white">
+                Lifetime Warranty on All Workmanship
+              </span>
+            </motion.div>
+          </div>
 
           {/* Headline */}
           <motion.h1
@@ -128,7 +140,7 @@ export default function Hero() {
             </div>
             <div className="pl-6">
               <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {satisfactionCount}%
+                {satisfactionCount.toFixed(2)}%
               </div>
               <div className="text-xs text-foreground/70">Satisfaction</div>
             </div>

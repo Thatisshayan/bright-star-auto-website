@@ -15,6 +15,10 @@ export const BUSINESS = {
     { display: "+1 (416) 635-0812", href: "tel:+14166350812" },
     { display: "+1 (416) 833-9252", href: "tel:+14168339252" },
   ],
+  // Used for the WhatsApp/SMS click-to-chat button — E.164, no "+" or
+  // formatting, since that's what wa.me and sms: URIs expect.
+  whatsappNumber: "14168339252",
+  smsNumber: "+14168339252",
   email: "Brightstarautoltd@gmail.com",
   hours: {
     weekday: "9:00 AM – 6:00 PM",

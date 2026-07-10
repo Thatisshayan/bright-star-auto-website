@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Eye } from "lucide-react";
+import { Link } from "wouter";
 
 const galleryItems = [
   {
@@ -84,9 +85,13 @@ export default function Gallery() {
           {galleryItems.map((item, index) => (
             <motion.div
               key={index}
-              className="group relative overflow-hidden rounded-xl aspect-square cursor-pointer"
+              className="group relative overflow-hidden rounded-xl aspect-square"
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
+            >
+            <Link
+              href="/gallery"
+              className="block w-full h-full cursor-pointer"
             >
               {/* Image */}
               <img
@@ -109,6 +114,7 @@ export default function Gallery() {
                   {item.title}
                 </h3>
               </div>
+            </Link>
             </motion.div>
           ))}
         </motion.div>

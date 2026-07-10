@@ -1,3 +1,10 @@
+// DRAFT — parked, not wired into the app. NOT dead code, do not delete.
+// This "Track My Repair" page is fully built but only works against hardcoded
+// demo data (see DEMO_TICKET below) — there's no backend/shop-management
+// integration yet, so it's been pulled out of routing (client/src/App.tsx)
+// and nav (Footer.tsx) to avoid confusing real customers.
+// To relaunch: move back to client/src/pages/, re-add the route in App.tsx,
+// re-add the Footer link, and replace the demo lookup with a real API call.
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import {

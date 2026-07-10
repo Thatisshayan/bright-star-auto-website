@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, MapPin, Clock } from "lucide-react";
+import { Link } from "wouter";
 import { BUSINESS } from "@shared/const";
 
 export default function Navbar() {
@@ -71,10 +72,9 @@ export default function Navbar() {
       >
         <div className="container flex items-center justify-between h-20">
           {/* Logo */}
-          <motion.a
+          <Link
             href="/"
-            className="flex items-center gap-3"
-            whileHover={{ scale: 1.03 }}
+            className="flex items-center gap-3 transition-transform hover:scale-[1.03]"
           >
             <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg shadow-primary/30 flex-shrink-0">
               <img
@@ -91,20 +91,29 @@ export default function Navbar() {
                 AUTO BODYSHOP
               </span>
             </div>
-          </motion.a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map(link => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-                whileHover={{ color: "oklch(68% 0.135 80)" }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
+            {navLinks.map(link =>
+              link.href.startsWith("/#") ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* CTA Button */}
@@ -147,19 +156,36 @@ export default function Navbar() {
                 <Phone size={14} />
                 {BUSINESS.phones[0].display}
               </a>
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors py-2"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, i) =>
+                link.href.startsWith("/#") ? (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors py-2"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </motion.a>
+                ) : (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors py-2 block"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                )
+              )}
               <motion.a
                 href="/#contact"
                 className="px-6 py-2.5 bg-primary text-primary-foreground font-semibold rounded-lg text-center"

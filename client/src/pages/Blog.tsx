@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Calendar, Clock } from "lucide-react";
+import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -65,7 +66,7 @@ export default function Blog() {
                 viewport={{ once: true, amount: 0.1 }}
                 className="group"
               >
-                <a href={`/blog/${post.slug}`} className="block">
+                <Link href={`/blog/${post.slug}`} className="block">
                   <div className="relative overflow-hidden rounded-xl aspect-video mb-4">
                     <img
                       src={post.coverImage}
@@ -94,7 +95,7 @@ export default function Blog() {
                       {post.readTime}
                     </span>
                   </div>
-                </a>
+                </Link>
               </motion.article>
             ))}
           </div>

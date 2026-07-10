@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { useParams } from "wouter";
+import { Link, useParams } from "wouter";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -67,13 +67,13 @@ export default function BlogPost() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <a
+            <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-primary hover:underline mb-6"
             >
               <ArrowLeft size={16} />
               Back to Blog
-            </a>
+            </Link>
             <span className="signature-underline text-xs font-semibold text-primary tracking-[0.25em] uppercase">
               {post.category}
             </span>
@@ -148,12 +148,12 @@ export default function BlogPost() {
               >
                 Get a Free Estimate
               </a>
-              <a
+              <Link
                 href="/faq"
                 className="px-6 py-3 border border-white/15 text-white font-semibold rounded-lg hover:border-primary hover:text-primary transition-all"
               >
                 Read the FAQ
-              </a>
+              </Link>
             </div>
           </motion.div>
 
@@ -164,7 +164,7 @@ export default function BlogPost() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {related.map(r => (
-                  <a
+                  <Link
                     key={r.slug}
                     href={`/blog/${r.slug}`}
                     className="block p-5 rounded-xl border border-white/10 hover:border-primary/50 transition-colors"
@@ -175,7 +175,7 @@ export default function BlogPost() {
                     <h4 className="text-white font-semibold mt-2 leading-snug">
                       {r.title}
                     </h4>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

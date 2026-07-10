@@ -7,6 +7,7 @@ import {
   Mail,
   Navigation,
 } from "lucide-react";
+import { Link } from "wouter";
 import { BUSINESS } from "@shared/const";
 
 const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(BUSINESS.address.full)}&z=15&output=embed`;
@@ -83,8 +84,18 @@ export default function Footer() {
                 { label: "Gallery", href: "/gallery" },
                 { label: "Blog", href: "/blog" },
                 { label: "FAQ", href: "/faq" },
-                { label: "Track My Repair", href: "/track-repair" },
                 { label: "About", href: "/about" },
+              ].map(link => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-foreground/60 hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {[
                 { label: "Reviews", href: "/#reviews" },
                 { label: "Contact", href: "/#contact" },
               ].map(link => (
@@ -118,12 +129,12 @@ export default function Footer() {
                 "Mechanical & Electrical",
               ].map(service => (
                 <li key={service}>
-                  <a
+                  <Link
                     href="/services"
                     className="text-foreground/60 hover:text-primary transition-colors"
                   >
                     {service}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -230,18 +241,18 @@ export default function Footer() {
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <a
+          <Link
             href="/privacy-policy"
             className="hover:text-foreground/70 transition-colors"
           >
             Privacy Policy
-          </a>
-          <a
+          </Link>
+          <Link
             href="/terms-of-service"
             className="hover:text-foreground/70 transition-colors"
           >
             Terms of Service
-          </a>
+          </Link>
         </motion.div>
       </div>
     </footer>

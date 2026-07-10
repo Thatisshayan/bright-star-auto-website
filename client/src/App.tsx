@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ChatWidget from "./components/ChatWidget";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -11,7 +12,6 @@ import GalleryPage from "./pages/Gallery";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import FAQ from "./pages/FAQ";
-import TrackRepair from "./pages/TrackRepair";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 
@@ -23,7 +23,6 @@ function Router() {
       <Route path={"/services"} component={ServicesPage} />
       <Route path={"/gallery"} component={GalleryPage} />
       <Route path={"/faq"} component={FAQ} />
-      <Route path={"/track-repair"} component={TrackRepair} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogPost} />
       <Route path={"/privacy-policy"} component={PrivacyPolicy} />
@@ -42,6 +41,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <ChatWidget />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
