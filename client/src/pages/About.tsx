@@ -81,9 +81,12 @@ export default function About() {
           >
             <Quote size={40} className="text-primary/50 mx-auto mb-6" />
             <p className="text-xl md:text-2xl font-display text-white leading-snug mb-8">
-              "I didn't want to build just another body shop. I wanted a place
-              where people walk in stressed about an accident and walk out
-              feeling like someone actually had their back."
+              My vision was never to build just another body shop. I wanted to
+              create a place where customers feel genuinely cared for. We know
+              accidents and vehicle damage can be stressful, so we treat every
+              vehicle as if it were our own and every customer like family. My
+              goal is that when you leave, you don't just remember the quality
+              of the repair, you leave knowing someone truly had your back.
             </p>
             <div className="inline-flex flex-col items-center">
               <span className="font-display text-lg font-bold text-primary tracking-wide">

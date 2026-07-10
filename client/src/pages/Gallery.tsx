@@ -35,6 +35,16 @@ const galleryItems: GalleryItem[] = [
     category: "Collision Repair",
   },
   {
+    image: "/gallery/stock-dentrepair.jpg",
+    title: "Panel Dent Repair",
+    category: "Collision Repair",
+  },
+  {
+    image: "/gallery/stock-bumperrepair.jpg",
+    title: "Bumper Repair & Refit",
+    category: "Collision Repair",
+  },
+  {
     image: "/gallery/stock-structural.jpg",
     title: "Frame & Structural Alignment",
     category: "Structural Repair",
@@ -45,8 +55,28 @@ const galleryItems: GalleryItem[] = [
     category: "Structural Repair",
   },
   {
+    image: "/gallery/stock-repairshop-tools.jpg",
+    title: "Shop Floor Diagnostics",
+    category: "Structural Repair",
+  },
+  {
     image: "/gallery/stock-paintbooth.jpg",
     title: "Spray Booth Paint Application",
+    category: "Paint & Refinishing",
+  },
+  {
+    image: "/gallery/stock-spraygun.jpg",
+    title: "Base Coat Application",
+    category: "Paint & Refinishing",
+  },
+  {
+    image: "/gallery/stock-spraybumper.jpg",
+    title: "Bumper Refinishing",
+    category: "Paint & Refinishing",
+  },
+  {
+    image: "/gallery/stock-maskspray.jpg",
+    title: "Precision Masking & Spray",
     category: "Paint & Refinishing",
   },
   {
@@ -57,6 +87,31 @@ const galleryItems: GalleryItem[] = [
   {
     image: "/gallery/stock-detailing.jpg",
     title: "Interior & Exterior Detailing",
+    category: "Detailing",
+  },
+  {
+    image: "/gallery/stock-polishmachine.jpg",
+    title: "Machine Polish Finishing",
+    category: "Detailing",
+  },
+  {
+    image: "/gallery/stock-polishred.jpg",
+    title: "Gloss Finish Polish",
+    category: "Detailing",
+  },
+  {
+    image: "/gallery/stock-buffing.jpg",
+    title: "Hand Buffing Final Pass",
+    category: "Detailing",
+  },
+  {
+    image: "/gallery/stock-inspectclassic.jpg",
+    title: "Final Quality Inspection",
+    category: "Detailing",
+  },
+  {
+    image: "/gallery/stock-interiordetail.jpg",
+    title: "Interior Detail Clean",
     category: "Detailing",
   },
 ];
@@ -213,20 +268,47 @@ export default function GalleryPage() {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
-            <BeforeAfterSlider
-              beforeImage="/gallery/stock-shopfloor.jpg"
-              afterImage="/gallery/hero-orange-car.jpg"
-              beforeLabel="In The Shop"
-              afterLabel="Finished Result"
-            />
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <BeforeAfterSlider
+                beforeImage="/gallery/stock-shopfloor.jpg"
+                afterImage="/gallery/hero-orange-car.jpg"
+                beforeLabel="In The Shop"
+                afterLabel="Finished Result"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <BeforeAfterSlider
+                beforeImage="/gallery/stock-dentrepair.jpg"
+                afterImage="/gallery/stock-polishred.jpg"
+                beforeLabel="Damage"
+                afterLabel="Refinished"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <BeforeAfterSlider
+                beforeImage="/gallery/stock-repairshop-tools.jpg"
+                afterImage="/gallery/stock-inspectclassic.jpg"
+                beforeLabel="Diagnostics"
+                afterLabel="Final Inspection"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
