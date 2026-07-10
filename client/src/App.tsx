@@ -1,7 +1,8 @@
+import { useLayoutEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ChatWidget from "./components/ChatWidget";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -14,6 +15,25 @@ import TermsOfService from "./pages/TermsOfService";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+
+// wouter's client-side navigation doesn't reset scroll position the way a
+// real page load does, so a page opened while scrolled down on the
+// previous page stays scrolled down. Jump to top on every route change,
+// bypassing the global smooth-scroll CSS so it's an instant jump, not an
+// animated scroll.
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useLayoutEffect(() => {
+    const html = document.documentElement;
+    const previousBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    html.style.scrollBehavior = previousBehavior;
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   return (
@@ -40,6 +60,7 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
+          <ScrollToTop />
           <Router />
           <ChatWidget />
         </TooltipProvider>
