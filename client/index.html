@@ -125,6 +125,13 @@
       <input type="text" name="bot-field" />
     </form>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Cloudflare Web Analytics (lightweight, privacy-friendly, no setup required) -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "%VITE_CLOUDFLARE_ANALYTICS_TOKEN%"}'
+    ></script>
+    <!-- Umami Analytics (optional, if env vars are set) -->
     <script
       defer
       src="%VITE_ANALYTICS_ENDPOINT%/umami"

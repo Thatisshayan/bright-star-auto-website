@@ -7,8 +7,23 @@ import {
   Clock,
   CheckCircle2,
   Loader2,
+  AlertCircle,
 } from "lucide-react";
+import { z } from "zod";
 import { BUSINESS } from "@shared/const";
+
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  phone: z
+    .string()
+    .regex(/^[0-9\-\s\+\(\)]+$/, "Phone number format is invalid")
+    .min(10, "Phone number must be at least 10 digits"),
+  email: z.string().email("Please enter a valid email address"),
+  vehicle: z.string().optional(),
+  service: z.string().optional(),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+  "bot-field": z.string(),
+});
 
 export function encode(data: Record<string, string>) {
   return Object.keys(data)
@@ -29,6 +44,7 @@ export default function Contact() {
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -41,10 +57,23 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
 
     // Silently drop suspected bot submissions instead of surfacing an error.
     if (formData["bot-field"]) {
       setStatus("success");
+      return;
+    }
+
+    // Validate form data
+    const result = contactFormSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach(err => {
+        const path = err.path.join(".");
+        fieldErrors[path] = err.message;
+      });
+      setErrors(fieldErrors);
       return;
     }
 
@@ -227,9 +256,17 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
+                className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all ${
+                  errors.name ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                }`}
                 placeholder="Your name"
               />
+              {errors.name && (
+                <p className="text-destructive text-xs mt-1 flex items-center gap-1">
+                  <AlertCircle size={14} />
+                  {errors.name}
+                </p>
+              )}
             </motion.div>
 
             <motion.div
@@ -246,9 +283,17 @@ export default function Contact() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
+                  className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all ${
+                    errors.phone ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                  }`}
                   placeholder="(416) 000-0000"
                 />
+                {errors.phone && (
+                  <p className="text-destructive text-xs mt-1 flex items-center gap-1">
+                    <AlertCircle size={14} />
+                    {errors.phone}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-white mb-2">
@@ -260,9 +305,17 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all"
+                  className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all ${
+                    errors.email ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                  }`}
                   placeholder="your@email.com"
                 />
+                {errors.email && (
+                  <p className="text-destructive text-xs mt-1 flex items-center gap-1">
+                    <AlertCircle size={14} />
+                    {errors.email}
+                  </p>
+                )}
               </div>
             </motion.div>
 
@@ -323,9 +376,17 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3 bg-transparent border-0 border-b border-white/15 text-white placeholder-foreground/40 focus:border-primary focus:outline-none transition-all resize-none"
+                className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all resize-none ${
+                  errors.message ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                }`}
                 placeholder="Tell us about your vehicle and what you need..."
               />
+              {errors.message && (
+                <p className="text-destructive text-xs mt-1 flex items-center gap-1">
+                  <AlertCircle size={14} />
+                  {errors.message}
+                </p>
+              )}
             </motion.div>
 
             {/* Honeypot field: hidden from real users via CSS, but visible to

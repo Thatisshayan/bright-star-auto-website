@@ -2,6 +2,16 @@
   command = "vite build"
   publish = "dist/public"
 
+# Form submission notifications
+[forms]
+  [[forms.notification]]
+    form = "contact"
+    email = "Brightstarautoltd@gmail.com"
+
+  [[forms.notification]]
+    form = "contact"
+    email = "obsidianmedia.yt@gmail.com"
+
 # Client-side routing (wouter) — let the SPA handle unknown paths.
 [[redirects]]
   from = "/*"
