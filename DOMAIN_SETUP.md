@@ -30,14 +30,16 @@ You need to configure DNS records with your domain registrar (whoever you purcha
 2. **Find DNS/Nameserver settings**
    - Look for "Nameservers", "DNS Settings", or "Domain Management"
 
-3. **Replace nameservers with Netlify's nameservers:**
+3. **Replace nameservers with NSOne nameservers** (recommended by Netlify):
 
    ```
-   dns1.netlify.com
-   dns2.netlify.com
-   dns3.netlify.com
-   dns4.netlify.com
+   dns1.p03.nsone.net
+   dns2.p03.nsone.net
+   dns3.p03.nsone.net
+   dns4.p03.nsone.net
    ```
+
+   _(Or use Netlify's nameservers if NSOne isn't available: dns1.netlify.com, dns2.netlify.com, dns3.netlify.com, dns4.netlify.com)_
 
 4. **In Netlify Dashboard:**
    - Go to https://app.netlify.com
