@@ -25,5 +25,5 @@ export const BUSINESS = {
     saturday: "9:00 AM – 4:00 PM",
     sunday: "Closed",
   },
-  url: "https://brightstarauto.net",
+  url: "https://brightstarautobody.ca",
 } as const;

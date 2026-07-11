@@ -10,9 +10,9 @@ const pillars = [
   },
   {
     icon: Award,
-    title: "Insurance Approved",
+    title: "Quality Certified",
     description:
-      "Trusted by all insurance companies for quality and reliability.",
+      "Certified professionals meeting the highest automotive repair standards.",
   },
   {
     icon: Zap,

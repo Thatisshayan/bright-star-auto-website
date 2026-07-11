@@ -61,7 +61,7 @@ const faqs: FAQCategory[] = [
       {
         question: "Do you price-match other shops?",
         answer:
-          "We focus on transparent, insurance-approved pricing rather than competing purely on price — cutting corners on materials or procedure is how repairs fail down the road. We're happy to walk you through exactly what's included in your estimate.",
+          "We focus on transparent, quality-driven pricing rather than competing purely on price — cutting corners on materials or procedure is how repairs fail down the road. We're happy to walk you through exactly what's included in your estimate.",
       },
     ],
   },

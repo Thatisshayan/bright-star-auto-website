@@ -64,7 +64,7 @@ export default function Footer() {
             </div>
             <p className="text-sm text-foreground/60">
               Collision repair, paint refinishing, and restoration for North
-              York drivers — done right, insurance-approved.
+              York drivers — done right, with precision and care.
             </p>
           </motion.div>
 

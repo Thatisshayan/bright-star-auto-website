@@ -110,8 +110,8 @@ export default function Hero() {
             className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl leading-relaxed"
             variants={itemVariants}
           >
-            Expert collision repair, paint refinishing, and restoration.
-            Insurance-approved. Free estimates. Your vehicle deserves the best.
+            Expert collision repair, paint refinishing, and restoration. Free
+            estimates. Your vehicle deserves the best.
           </motion.p>
 
           {/* Stats - plain divided row, compact */}
