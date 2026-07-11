@@ -27,6 +27,14 @@ describe("Contact form", () => {
     fireEvent.change(screen.getByPlaceholderText("your@email.com"), {
       target: { value: "jane@example.com" },
     });
+    fireEvent.change(
+      screen.getByPlaceholderText(
+        "Tell us about your vehicle and what you need..."
+      ),
+      {
+        target: { value: "I need collision repair for my Honda Civic" },
+      }
+    );
 
     fireEvent.click(
       screen.getByRole("button", { name: /get my free estimate/i })
@@ -53,6 +61,14 @@ describe("Contact form", () => {
     fireEvent.change(screen.getByPlaceholderText("your@email.com"), {
       target: { value: "bot@example.com" },
     });
+    fireEvent.change(
+      screen.getByPlaceholderText(
+        "Tell us about your vehicle and what you need..."
+      ),
+      {
+        target: { value: "I need collision repair for my Honda Civic" },
+      }
+    );
     // The honeypot is aria-hidden by design (invisible to real users and
     // screen readers), so it must be queried directly rather than by label.
     const honeypot = container.querySelector('input[name="bot-field"]')!;
