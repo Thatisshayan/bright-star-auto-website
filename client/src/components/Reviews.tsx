@@ -221,7 +221,7 @@ export default function Reviews() {
             { label: "4.9", value: "61+ Reviews", showStar: true },
             { label: "10+ Years", value: "Experience" },
             { label: "100%", value: "Satisfaction" },
-            { label: "Insurance", value: "Approved" },
+            { label: "Lifetime", value: "Workmanship Warranty" },
           ].map((badge, i) => (
             <div key={i} className="text-center py-4 px-3">
               <div className="text-sm font-bold text-primary flex items-center justify-center gap-1">
