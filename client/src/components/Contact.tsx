@@ -17,7 +17,11 @@ const contactFormSchema = z.object({
   phone: z
     .string()
     .regex(/^[0-9\-\s\+\(\)]+$/, "Phone number format is invalid")
-    .min(10, "Phone number must be at least 10 digits"),
+    .min(10, "Phone number must be at least 10 characters")
+    .refine(
+      (phone) => (phone.match(/\d/g) || []).length >= 10,
+      "Phone number must contain at least 10 digits"
+    ),
   email: z.string().email("Please enter a valid email address"),
   vehicle: z.string().optional(),
   service: z.string().optional(),
