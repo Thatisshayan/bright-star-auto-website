@@ -89,32 +89,32 @@ export default function Gallery() {
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
             >
-            <Link
-              href="/gallery"
-              className="block w-full h-full cursor-pointer"
-            >
-              {/* Image */}
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+              <Link
+                href="/gallery"
+                className="block w-full h-full cursor-pointer"
+              >
+                {/* Image */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Content - anchored bottom-left, no card box */}
-              <div className="absolute inset-x-0 bottom-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Eye size={14} />
-                  {item.category}
+                {/* Content - anchored bottom-left, no card box */}
+                <div className="absolute inset-x-0 bottom-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Eye size={14} />
+                    {item.category}
+                  </div>
+                  <h3 className="text-lg font-display font-bold text-white">
+                    {item.title}
+                  </h3>
                 </div>
-                <h3 className="text-lg font-display font-bold text-white">
-                  {item.title}
-                </h3>
-              </div>
-            </Link>
+              </Link>
             </motion.div>
           ))}
         </motion.div>

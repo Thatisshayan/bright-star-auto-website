@@ -1,6 +1,7 @@
 # Brightstarautobody.ca Domain Setup Guide
 
 ## Overview
+
 Your custom domain is **Brightstarautobody.ca** and is currently hosted on Netlify at `https://bright-star-auto.netlify.com`. This guide will help you connect your custom domain to Netlify and ensure everything works correctly.
 
 ---
@@ -8,9 +9,11 @@ Your custom domain is **Brightstarautobody.ca** and is currently hosted on Netli
 ## DNS Configuration for Brightstarautobody.ca
 
 ### Where to Configure DNS
+
 You need to configure DNS records with your domain registrar (whoever you purchased the domain from). This is NOT done in Netlify, but rather in your registrar's DNS management panel.
 
 **Common registrars:**
+
 - GoDaddy
 - Namecheap
 - Google Domains
@@ -28,6 +31,7 @@ You need to configure DNS records with your domain registrar (whoever you purcha
    - Look for "Nameservers", "DNS Settings", or "Domain Management"
 
 3. **Replace nameservers with Netlify's nameservers:**
+
    ```
    dns1.netlify.com
    dns2.netlify.com
@@ -55,6 +59,7 @@ You need to configure DNS records with your domain registrar (whoever you purcha
 If your registrar doesn't allow nameserver changes, add these DNS records:
 
 **A Record:**
+
 ```
 Type: A
 Name: @ (or leave blank)
@@ -62,6 +67,7 @@ Value: 75.2.60.5
 ```
 
 **CNAME Record for www subdomain:**
+
 ```
 Type: CNAME
 Name: www
@@ -69,6 +75,7 @@ Value: bright-star-auto.netlify.app
 ```
 
 **Steps:**
+
 1. Go to your registrar's DNS settings
 2. Add/modify the A record to point to Netlify
 3. Add a CNAME record for www
@@ -79,11 +86,13 @@ Value: bright-star-auto.netlify.app
 ## Verifying Your Domain is Working
 
 ### Check 1: Browser Test
+
 1. Open `https://brightstarautobody.ca` in your browser
 2. You should see the Bright Star Auto website
 3. Check that the URL stays as `brightstarautobody.ca` (not redirecting to netlify.app)
 
 ### Check 2: Using Command Line (Optional)
+
 ```bash
 # Test DNS resolution
 nslookup brightstarautobody.ca
@@ -95,6 +104,7 @@ curl -I https://brightstarautobody.ca
 Should return HTTP 200 status.
 
 ### Check 3: Netlify Status
+
 1. Go to https://app.netlify.com
 2. Select "bright-star-auto" project
 3. Go to **Site settings** → **Domain management**
@@ -107,6 +117,7 @@ Should return HTTP 200 status.
 Netlify automatically provides a free SSL certificate for your domain via Let's Encrypt. This happens automatically once DNS is configured.
 
 **Verify HTTPS is working:**
+
 - Visit `https://brightstarautobody.ca`
 - Look for the green 🔒 lock icon in the address bar
 - This should appear within a few minutes after DNS is set up
@@ -118,6 +129,7 @@ Netlify automatically provides a free SSL certificate for your domain via Let's 
 If you had traffic at the old domain, redirect it to the new one:
 
 **In Netlify:**
+
 1. Go to **Site settings** → **Domain management**
 2. Add the old domain as an alias (if applicable)
 3. Set up a redirect in netlify.toml:
@@ -136,20 +148,24 @@ If you had traffic at the old domain, redirect it to the new one:
 ## Troubleshooting
 
 ### Domain not resolving / site not loading
+
 - Wait 24-48 hours for DNS propagation
 - Check DNS settings at https://www.whatsmydns.net/
 - Verify nameservers are correctly set in registrar
 
 ### SSL certificate not appearing
+
 - Clear browser cache (Ctrl+Shift+Delete)
 - Wait 5-10 minutes after DNS setup completes
 - Check Netlify dashboard for certificate status
 
 ### Redirected to netlify.app
+
 - Your DNS is not configured correctly
 - Go back to your registrar and verify nameservers
 
 ### www vs non-www versions not working
+
 - Add CNAME record for `www` (see Option B above)
 - Or use Netlify's "Primary domain" setting
 

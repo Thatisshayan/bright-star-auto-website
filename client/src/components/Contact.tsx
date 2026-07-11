@@ -19,7 +19,7 @@ const contactFormSchema = z.object({
     .regex(/^[0-9\-\s\+\(\)]+$/, "Phone number format is invalid")
     .min(10, "Phone number must be at least 10 characters")
     .refine(
-      (phone) => (phone.match(/\d/g) || []).length >= 10,
+      phone => (phone.match(/\d/g) || []).length >= 10,
       "Phone number must contain at least 10 digits"
     ),
   email: z.string().email("Please enter a valid email address"),
@@ -261,7 +261,9 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all ${
-                  errors.name ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                  errors.name
+                    ? "border-destructive focus:border-destructive"
+                    : "border-white/15 focus:border-primary"
                 }`}
                 placeholder="Your name"
               />
@@ -288,7 +290,9 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all ${
-                    errors.phone ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                    errors.phone
+                      ? "border-destructive focus:border-destructive"
+                      : "border-white/15 focus:border-primary"
                   }`}
                   placeholder="(416) 000-0000"
                 />
@@ -310,7 +314,9 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all ${
-                    errors.email ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                    errors.email
+                      ? "border-destructive focus:border-destructive"
+                      : "border-white/15 focus:border-primary"
                   }`}
                   placeholder="your@email.com"
                 />
@@ -381,7 +387,9 @@ export default function Contact() {
                 onChange={handleChange}
                 rows={4}
                 className={`w-full px-4 py-3 bg-transparent border-0 border-b text-white placeholder-foreground/40 focus:outline-none transition-all resize-none ${
-                  errors.message ? "border-destructive focus:border-destructive" : "border-white/15 focus:border-primary"
+                  errors.message
+                    ? "border-destructive focus:border-destructive"
+                    : "border-white/15 focus:border-primary"
                 }`}
                 placeholder="Tell us about your vehicle and what you need..."
               />

@@ -1,4 +1,5 @@
 # Google Business Profile Setup Guide
+
 ## Step-by-Step Instructions for Bright Star Auto Ltd
 
 This guide will walk you through setting up and optimizing your Google Business Profile so your business shows up in Google Search with a "Visit Website" button.
@@ -8,6 +9,7 @@ This guide will walk you through setting up and optimizing your Google Business 
 ## Prerequisites
 
 Before starting, you'll need:
+
 - ✅ Google account (Gmail preferred)
 - ✅ Business address: 51 Toro Road North, Unit #3, North York, ON M3J 2A4
 - ✅ Business phone number: (416) 635-0812 or (416) 833-9252
@@ -62,16 +64,19 @@ Before starting, you'll need:
 Google requires verification to prove you own/manage the business. You have several options:
 
 #### Option A: Email Verification (Fastest - 24-48 hours)
+
 1. Google sends a verification email to an associated email
 2. Click the link in the email within 7 days
 3. Your business is verified
 
 #### Option B: Phone Verification (Same day)
+
 1. Google calls a business phone number
 2. You answer and provide a verification code
 3. Business is verified immediately
 
 #### Option C: Postcard Verification (1-2 weeks)
+
 1. Google mails a postcard to your business address
 2. Postcard contains a verification code
 3. Enter the code in Google Business
@@ -96,21 +101,25 @@ Once your business is claimed/created, you need to fill in complete information.
 ### Step 2: Fill in Business Information
 
 #### Business Name & Category
+
 - **Business name:** Bright Star Auto Ltd ✅
 - **Business category:** Select **Auto Body Shop** or **Auto Repair**
   - Click **"Edit"** if already listed
   - If incorrect, click the category and search for "Auto Body" to change
 
 #### Address
+
 - **Address:** 51 Toro Road North, Unit #3, North York, ON M3J 2A4 ✅
 - Click **"Edit"** to verify/update if incorrect
 
 #### Phone Number
+
 - **Main phone:** (416) 635-0812 ✅
 - **Secondary phone:** (416) 833-9252 (optional but good to add)
 - These appear in "Call" buttons on Google Search
 
 #### Website URL (THIS IS KEY FOR THE "VISIT WEBSITE" BUTTON)
+
 1. Look for **"Website"** field
 2. Enter: **https://brightstarautobody.ca**
    - Make sure it includes `https://` (not just `brightstarautobody.ca`)
@@ -137,8 +146,8 @@ Once your business is claimed/created, you need to fill in complete information.
 2. Write a compelling description (160-320 characters):
 
 ```
-Premium auto bodyshop in North York specializing in collision repair, 
-paint refinishing, structural repair, and restoration. Free estimates. 
+Premium auto bodyshop in North York specializing in collision repair,
+paint refinishing, structural repair, and restoration. Free estimates.
 Lifetime warranty on all workmanship.
 ```
 
@@ -167,12 +176,14 @@ Lifetime warranty on all workmanship.
 This is crucial - high-quality photos help customers trust your business.
 
 #### Main Profile Photo (Logo)
+
 1. Find **"Logo"** or **"Profile photo"** section
 2. Click **"Upload photo"**
 3. Upload your business logo: `bright-star-auto-logo.png`
 4. Size: Minimum 250x250px, recommended 400x400px
 
 #### Business Photos
+
 1. Find **"Photos"** or **"Business photos"** section
 2. Click **"Add photos"**
 3. Upload 5-10 high-quality photos showing:
@@ -360,6 +371,7 @@ Google Business allows you to post updates, which help with visibility:
 ### Monthly Checkup
 
 Every month, review:
+
 - ✅ New reviews (respond to all)
 - ✅ Q&A updates (answer new questions)
 - ✅ Insights (do customers call or visit website more?)
@@ -401,20 +413,21 @@ Once everything is set up:
 
 ## Common Issues & Solutions
 
-| Problem | Solution |
-|---------|----------|
-| Can't find my business in Google | Create a new business or wait for existing one to sync (24-48 hours) |
-| "Visit Website" button not showing | Verify website URL is saved, wait 24-48 hours, ensure profile is 80% complete |
-| Reviews not appearing | Verify your business, ensure reviewers have Google accounts, check for spam filters |
-| Customers can't call | Verify phone number is correct and formatted with area code |
-| Photos not showing | Use JPG/PNG format, min 250x250px, upload through official Google Business interface |
-| Business address incorrect | Edit address in Business Info, verify with Google if it conflicts |
+| Problem                            | Solution                                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------------------ |
+| Can't find my business in Google   | Create a new business or wait for existing one to sync (24-48 hours)                 |
+| "Visit Website" button not showing | Verify website URL is saved, wait 24-48 hours, ensure profile is 80% complete        |
+| Reviews not appearing              | Verify your business, ensure reviewers have Google accounts, check for spam filters  |
+| Customers can't call               | Verify phone number is correct and formatted with area code                          |
+| Photos not showing                 | Use JPG/PNG format, min 250x250px, upload through official Google Business interface |
+| Business address incorrect         | Edit address in Business Info, verify with Google if it conflicts                    |
 
 ---
 
 ## Pro Tips for Success
 
 ✨ **Do this:**
+
 - Respond to reviews within 24 hours (even just to say "Thank you!")
 - Post updates monthly to keep profile fresh
 - Use natural language in descriptions (avoid keyword stuffing)
@@ -423,6 +436,7 @@ Once everything is set up:
 - Encourage satisfied customers to leave reviews
 
 ❌ **Don't do this:**
+
 - Post fake reviews (Google catches this)
 - Use multiple Google Business profiles for the same business
 - Ignore customer reviews or questions
@@ -444,6 +458,7 @@ Once everything is set up:
 ## Summary
 
 Your Google Business Profile is live! The steps above will ensure:
+
 - ✅ Customers find you in Google Search
 - ✅ They see the "Visit Website" button linking to brightstarautobody.ca
 - ✅ Your phone number and address are prominent

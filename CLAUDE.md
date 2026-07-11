@@ -82,17 +82,20 @@ bright-star-auto-website/
 ### Design System
 
 **Colors (OKLCH format in Tailwind):**
+
 - `oklch(8% 0 0)` - Deep black background (professional, luxury)
 - `oklch(72% 0.18 75)` / `#C9922A` - Primary gold (brand accent)
 - `oklch(80% 0.22 75)` - Gold glow (hover, emphasis)
 - `oklch(96% 0 0)` - Near-white text (readability)
 
 **Typography:**
+
 - **Display font:** Bebas Neue (headings, impact text)
 - **Body font:** Inter (readable, modern)
 - **Fluid scaling:** Using `clamp()` for responsive typography
 
 **Animation:**
+
 - Framer Motion for entrance/hover/scroll animations
 - Duration: 0.3-2s depending on context
 - Respects `prefers-reduced-motion` media query
@@ -130,6 +133,7 @@ Update this object to change business info across all pages.
 ```
 
 Add new routes by:
+
 1. Create page component in `src/pages/`
 2. Import and add `<Route>` in `App.tsx`
 3. Update navigation links in `Navbar.tsx`
@@ -145,6 +149,7 @@ Add new routes by:
 - Form notifications: Configured in `netlify.toml`
 
 **Submission Flow:**
+
 1. User submits form → React handler validates
 2. `fetch("/", { method: "POST", body: encoded-form })` posts to Netlify
 3. Netlify triggers form notifications (email to BUSINESS.email)
@@ -209,6 +214,7 @@ pnpm format
 ### Commit Messages
 
 Format: `[type] Brief description`
+
 - `[fix]` - Bug fixes
 - `[feat]` - New features
 - `[refactor]` - Code cleanup without behavior changes
@@ -225,6 +231,7 @@ Example: `[feat] Add form validation to contact form`
 ### Image Optimization Strategy
 
 **Current Situation:**
+
 - Hero image: 1.3MB JPG (should be ~200KB optimized)
 - Gallery images: 94KB - 325KB each (acceptable but can improve)
 - Issue: No WebP conversion, no responsive srcset
@@ -232,12 +239,14 @@ Example: `[feat] Add form validation to contact form`
 **Recommended Optimizations:**
 
 1. **Convert to WebP format** (30-40% size reduction)
+
    ```bash
    # Using ffmpeg or ImageMagick
    cwebp -q 80 input.jpg -o input.webp
    ```
 
 2. **Add responsive images** using `<picture>` element
+
    ```html
    <picture>
      <source srcset="image.webp" type="image/webp" />
@@ -246,6 +255,7 @@ Example: `[feat] Add form validation to contact form`
    ```
 
 3. **Lazy load non-critical images**
+
    ```html
    <img src="..." loading="lazy" decoding="async" />
    ```
@@ -266,6 +276,7 @@ Example: `[feat] Add form validation to contact form`
 - **CLS** (Cumulative Layout Shift): < 0.1 ✓
 
 **Improvements Made:**
+
 - Hero image preload in `index.html` with `fetchpriority="high"`
 - Framer Motion animations use only `transform` & `opacity` (GPU-accelerated)
 - Images in `netlify.toml` have cache-control headers (1-year immutable)
@@ -277,11 +288,12 @@ Example: `[feat] Add form validation to contact form`
 ### Add a New Page
 
 1. Create `src/pages/NewPage.tsx`:
+
    ```typescript
    import Navbar from "@/components/Navbar";
    import Footer from "@/components/Footer";
    import SEO from "@/components/SEO";
-   
+
    export default function NewPage() {
      return (
        <>
@@ -295,6 +307,7 @@ Example: `[feat] Add form validation to contact form`
    ```
 
 2. Add route in `App.tsx`:
+
    ```typescript
    <Route path="/new-page" component={NewPage} />
    ```
@@ -307,6 +320,7 @@ Example: `[feat] Add form validation to contact form`
 ### Update Business Information
 
 Edit `shared/const.ts` and all references update automatically:
+
 - Address, phone, email
 - Hours of operation
 - Website URL
@@ -314,16 +328,17 @@ Edit `shared/const.ts` and all references update automatically:
 ### Change Color Scheme
 
 Edit `tailwind.config.js` in the `colors` section:
+
 ```javascript
 export default {
   theme: {
     colors: {
       primary: "oklch(72% 0.18 75)", // Gold
-      background: "oklch(8% 0 0)",    // Black
+      background: "oklch(8% 0 0)", // Black
       // ...
-    }
-  }
-}
+    },
+  },
+};
 ```
 
 ### Add a New Component
@@ -347,6 +362,7 @@ export default {
 ### Cloudflare Web Analytics
 
 **Setup:** Add `VITE_CLOUDFLARE_ANALYTICS_TOKEN` to Netlify environment variables
+
 - Get token: https://dash.cloudflare.com → Web Analytics
 - No backend needed, runs on Cloudflare's edge
 - Lightweight, privacy-friendly, no cookies
@@ -356,6 +372,7 @@ export default {
 ### Sentry Error Tracking
 
 **Setup:** Add `VITE_SENTRY_DSN` to Netlify environment variables
+
 - Get DSN: https://sentry.io → New Project (React)
 - Captures unhandled errors and runtime exceptions
 - Session replay (recordings of user interactions leading to errors)
@@ -369,6 +386,7 @@ export default {
 ### Tailwind Classes Organization
 
 **Recommended order:**
+
 1. Layout (`flex`, `grid`, `absolute`, etc.)
 2. Sizing (`w-`, `h-`, `max-w-`, etc.)
 3. Spacing (`p-`, `m-`, `gap-`, etc.)
@@ -383,6 +401,7 @@ export default {
 ### Animations
 
 **Entrance animations:** 0.6s duration, staggered children
+
 ```tsx
 <motion.div
   initial={{ opacity: 0, y: 20 }}
@@ -393,6 +412,7 @@ export default {
 ```
 
 **Hover effects:** 0.3s, subtle scale
+
 ```tsx
 <motion.div
   whileHover={{ scale: 1.05 }}
@@ -409,11 +429,13 @@ export default {
 Located in `client/src/components/*.test.tsx`
 
 **Run tests:**
+
 ```bash
 pnpm test
 ```
 
 **Example:**
+
 ```typescript
 import { render, screen } from "@testing-library/react";
 import Contact from "@/components/Contact";
@@ -427,6 +449,7 @@ test("renders contact form", () => {
 ### End-to-End Testing
 
 Recommended tool: Playwright (pre-configured)
+
 ```bash
 pnpm exec playwright test
 ```
@@ -464,6 +487,7 @@ pnpm exec playwright test
 ### Form Notifications
 
 Configured in `netlify.toml`:
+
 ```toml
 [forms]
   [[forms.notification]]
@@ -478,20 +502,24 @@ Configured in `netlify.toml`:
 ### Common Issues
 
 **"Variable XXX is undefined in browser"**
+
 - Check variable starts with `VITE_` prefix
 - Check it's set in Netlify environment variables
 
 **"Form not submitting"**
+
 - Verify form `name="contact"` matches in HTML and React
 - Check honeypot field `bot-field` is hidden
 - Verify static form in `index.html` exists (Netlify detection)
 
 **"Animations not smooth"**
+
 - Use `transform` and `opacity` only (GPU-accelerated)
 - Avoid animating `width`, `height`, `left`, etc.
 - Check `prefers-reduced-motion` is respected
 
 **"Images loading slowly"**
+
 - Check image file sizes (hero should be ~200KB max)
 - Enable WebP format conversion
 - Add `loading="lazy"` to non-critical images
@@ -502,27 +530,32 @@ Configured in `netlify.toml`:
 ## Key Dependencies
 
 ### Frontend Framework
+
 - **React 19** - UI library
 - **TypeScript** - Type safety
 - **Vite** - Fast build tool
 - **Tailwind CSS 4** - Utility-first CSS
 
 ### UI & Animations
+
 - **Framer Motion** - Smooth animations
 - **Radix UI** - Accessible components
 - **lucide-react** - Icon library
 - **Recharts** - Charts/graphs
 
 ### Forms & Validation
+
 - **React Hook Form** - Form state management
 - **Zod** - Type-safe validation
 - **@hookform/resolvers** - Zod integration
 
 ### Routing & State
+
 - **Wouter** - Lightweight router (15KB)
 - **Next Themes** - Dark/light mode toggle
 
 ### Development
+
 - **TypeScript** - Type checking
 - **Vitest** - Unit testing framework
 - **Prettier** - Code formatting
@@ -556,6 +589,7 @@ Configured in `netlify.toml`:
 ## Support & Questions
 
 For questions about this codebase:
+
 1. Check this document first
 2. Search for similar patterns in existing code
 3. Check GitHub issues
