@@ -1,4 +1,21 @@
+# Robots.txt for Bright Star Auto Ltd
 User-agent: *
 Allow: /
 
-Sitemap: https://brightstarauto.net/sitemap.xml
+# Disallow private pages
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# Allow search engines to crawl static assets
+Allow: /public/
+
+# Sitemap location
+Sitemap: https://brightstarautobody.ca/sitemap.xml
+
+# Crawl delay (in seconds) - be respectful
+Crawl-delay: 1
+Request-rate: 1/5s
+
+# Comment: Auto Bodyshop in North York, Toronto
+# Contact: Brightstarautoltd@gmail.com
